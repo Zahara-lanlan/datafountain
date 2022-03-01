@@ -34,46 +34,74 @@
       </div>
       <div class="page-content">
         <div v-show="ruleVisible">
-          <p style="margin-top: 0vw">
-            <span id="page-title">大赛背景</span>
-            <span>{{ this.compBackGround }}</span>
-          </p>
-          <p>
-            <span id="page-title">赛题介绍</span>
-            <span>{{ this.compIntro }}</span>
-          </p>
-          <p>
-            <span id="page-title">赛制规则</span>
-            <span>{{ this.compRule }}</span>
-          </p>
-          <p>
-            <span id="page-title">参赛规则</span>
-            <span>{{ this.compSchedule }}</span>
-          </p>
+          <div id="background">
+             <p id="back">
+                <span class="page-title">大赛背景</span>
+                <span>{{ this.compBackGround }}</span>
+             </p>
+          </div>
+
+         <div id="commIntro">
+            <p id="intro">
+                <span class="page-title">赛题介绍</span>
+                <span>{{ this.compIntro }}</span>
+            </p>
+         </div>
+
+         <div id="compRule">
+            <p id="rule">
+                <span class="page-title">赛制规则</span>
+                <span>{{ this.compRule }}</span>
+            </p>
+
+         </div>
+         
+         <div id="compSchedule">
+           <p id="schedule">
+              <span class="page-title">参赛规则</span>
+              <span>{{ this.compSchedule }}</span>
+           </p>
+
+         </div>
+          
         </div>
         <!-- 提交要求，提交实例，评测标准  -->
         <div v-show="dataVisible">
-          <p style="margin-top: 0vw">
-            <span id="page-title">数据说明</span>
-            <span v-html="dataIntro"></span>
-          </p>
-
-          <p class="page-main-title">
-            <span id="page-title">提交要求</span>
+          <div id="dataIntro">
+            <p id="data">
+              <span class="page-title">数据说明</span>
+              <span v-html="dataIntro"></span>
+            </p>
+          </div>
+        
+        <div id="submissionRule">
+          <p id="submission">
+            <span class="page-title">提交要求</span>
             <span v-html="submissionRule"></span>
           </p>
-          <p>
-            <span id="page-title">提交实例</span>
+
+        </div>
+
+        <div id="submissionExample">
+            <p id="example">
+            <span class="page-title">提交实例</span>
             <span v-html="submissionExample"></span>
           </p>
-          <p>
-            <span id="page-title">评测标准</span>
+
+        </div>
+        
+        <div id="evalCriteria">
+           <p id="criteria">
+            <span class="page-title">评测标准</span>
             <span v-html="evalCriteria"></span>
           </p>
+
+        </div>
+         
         </div>
         <div v-show="questionVisible">
-          <p style="margin-top: -10vw">
-            <span id="page-title">常见问题</span>
+          <p>
+            <span class="page-title">常见问题</span>
             <span v-html="commonProblem"></span>
           </p>
         </div>
@@ -104,6 +132,7 @@ export default {
       dataVisible: false,
       questionVisible: false,
       commonProblem: "",
+      pageId:''
     };
   },
   mounted() {
@@ -113,17 +142,36 @@ export default {
     this.getDetailInfo();
     this.getCompDataEval();
     this.getCompProblem();
+     
   },
   beforeDestroy() {
     // 离开页面的时候清除
     console.log("清除详情");
     this.util.clearBodyBackGround();
   },
+  updated(){
+    console.log("pageId",this.pageId)
+    if(this.pageId === '1'){
+        document.getElementById('dataIntro').style.height = document.getElementById('data').getBoundingClientRect().height+10+'px'
+        document.getElementById('submissionRule').style.height = document.getElementById('submission').getBoundingClientRect().height+10+'px'
+        document.getElementById('submissionExample').style.height = document.getElementById('example').getBoundingClientRect().height+10+'px'
+
+    }else{
+       document.getElementById('background').style.height = document.getElementById('back').getBoundingClientRect().height+10+'px'
+       document.getElementById('commIntro').style.height = document.getElementById('intro').getBoundingClientRect().height+10+'px'
+       document.getElementById('compRule').style.height = document.getElementById('rule').getBoundingClientRect().height+10+'px'
+
+    }
+   
+    
+    
+
+  },
   methods: {
     getDetailInfo() {
       axios
         .post(
-          "http://175.24.79.108:8080/competition/getCompRule?compId=" +
+          "http://175.24.79.108:8080/competition/getCompRule?compId="+
             this.$route.query.compId
         )
         .then((data) => {
@@ -133,6 +181,9 @@ export default {
             this.compBackGround = data.data.compRule.compBackGround;
             this.compRule = data.data.compRule.compRule;
             this.compSchedule = data.data.compRule.compSchedule;
+           console.log (document.getElementById('back').getBoundingClientRect().height+'px')
+           console.log (document.getElementById('intro').getBoundingClientRect().height+'px')
+           console.log (document.getElementById('rule').getBoundingClientRect().height+'px')
           }
         })
         .catch((error) => {
@@ -142,7 +193,7 @@ export default {
     getCompDataEval: function () {
       axios
         .post(
-          "http://175.24.79.108:8080/competition/getCompDataEval?compId=" +
+          "http://175.24.79.108:8080/competition/getCompDataEval?compId="+
             this.$route.query.compId
         )
         .then((data) => {
@@ -174,7 +225,7 @@ export default {
     getCompProblem: function () {
       axios
         .post(
-          "http://175.24.79.108:8080/competition/getCompProblem?compId=" +
+          "http://175.24.79.108:8080/competition/getCompProblem?compId="+
             this.$route.query.compId
         )
         .then((data) => {
@@ -206,17 +257,17 @@ export default {
         this.ruleVisible = true;
         this.dataVisible = false;
         this.questionVisible = false;
+        this.pageId ="0"
       } else if (tabindex === "1") {
         this.ruleVisible = false;
         this.dataVisible = true;
         this.questionVisible = false;
-        Array.prototype.slice.call(document.querySelectorAll('.page-main-title')).forEach(item=>{
-          item.style.marginTop = "-6vw"
-        })
+        this.pageId = "1"
       } else {
         this.ruleVisible = false;
         this.dataVisible = false;
         this.questionVisible = true;
+        this.pageId = "2"
       }
     },
   },
@@ -301,14 +352,14 @@ export default {
   margin-left: 1.73333vw;
   transform-origin: left;
 }
-#page-title {
+.page-title {
   font-family: PingFangSC-Medium;
   font-size: 2.16667vw;
   color: #1a1a1a;
   letter-spacing: 0;
   /* line-height: 40px; */
   /* margin-left: 30px; */
-  margin-top: 10px;
+  /* margin-top: 10px; */
   display: block;
 }
 
@@ -375,12 +426,12 @@ export default {
   display: inline-block;
   /* border: 1px solid red; */
   transform: scale(0.5, 0.5);
-  transform-origin: left;
+  transform-origin: left top;
   width: 1000px;
   /* margin-left: -450px;  */
-  margin-top: -11vw;
+  /* margin-top: -11vw; */
   /* width: 100%; */
-  height: 100%;
+  /* height: 100%; */
   position: relative;
   /* left: 227px; */
 }
