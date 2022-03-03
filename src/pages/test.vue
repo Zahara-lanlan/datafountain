@@ -35,69 +35,76 @@
       <div class="page-content">
         <div v-show="ruleVisible">
           <div id="background">
-             <p id="back">
-                <span class="page-title">大赛背景</span>
-                <span>{{ this.compBackGround }}</span>
-             </p>
+            <p id="back">
+              <span class="page-title">大赛背景</span>
+              <span>{{ this.compBackGround }}</span>
+            </p>
           </div>
 
-         <div id="commIntro">
+          <div id="commIntro">
             <p id="intro">
-                <span class="page-title">赛题介绍</span>
-                <span>{{ this.compIntro }}</span>
+              <span class="page-title">赛题介绍</span>
+              <span>{{ this.compIntro }}</span>
             </p>
-         </div>
+          </div>
 
-         <div id="compRule">
+          <div id="compRule">
             <p id="rule">
-                <span class="page-title">赛制规则</span>
-                <span>{{ this.compRule }}</span>
+              <span class="page-title">赛制规则</span>
+              <span>{{ this.compRule }}</span>
             </p>
+          </div>
 
-         </div>
-         
-         <div id="compSchedule">
-           <p id="schedule">
+          <div id="compSchedule">
+            <p id="schedule">
               <span class="page-title">参赛规则</span>
               <span>{{ this.compSchedule }}</span>
-           </p>
-
-         </div>
-          
+            </p>
+          </div>
         </div>
         <!-- 提交要求，提交实例，评测标准  -->
         <div v-show="dataVisible">
+          <div class="data-set">
+            <div class="set">
+              <p class="setItem">
+                <span :fileName="fileName1" :type="type1">测试集 - {{this.fileName1}}</span>
+                <img src="./../assets/img/up3.png" alt="" @click="downCompData(fileName1,type1)">
+              </p>
+            </div>
+            <div class="set">
+              <p class="setItem">
+                <span :fileName="fileName2" :type="type2">训练集 - {{this.fileName2}}</span>
+                <img src="./../assets/img/up3.png" alt="" @click="downCompData(fileName2,type2)">
+              </p>
+            </div>
+          </div>
           <div id="dataIntro">
             <p id="data">
               <span class="page-title">数据说明</span>
               <span v-html="dataIntro"></span>
             </p>
           </div>
-        
-        <div id="submissionRule">
-          <p id="submission">
-            <span class="page-title">提交要求</span>
-            <span v-html="submissionRule"></span>
-          </p>
 
-        </div>
+          <div id="submissionRule">
+            <p id="submission">
+              <span class="page-title">提交要求</span>
+              <span v-html="submissionRule"></span>
+            </p>
+          </div>
 
-        <div id="submissionExample">
+          <div id="submissionExample">
             <p id="example">
-            <span class="page-title">提交实例</span>
-            <span v-html="submissionExample"></span>
-          </p>
+              <span class="page-title">提交实例</span>
+              <span v-html="submissionExample"></span>
+            </p>
+          </div>
 
-        </div>
-        
-        <div id="evalCriteria">
-           <p id="criteria">
-            <span class="page-title">评测标准</span>
-            <span v-html="evalCriteria"></span>
-          </p>
-
-        </div>
-         
+          <div id="evalCriteria">
+            <p id="criteria">
+              <span class="page-title">评测标准</span>
+              <span v-html="evalCriteria"></span>
+            </p>
+          </div>
         </div>
         <div v-show="questionVisible">
           <p>
@@ -113,7 +120,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Detail",
+  name: "Test",
   data() {
     return {
       bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
@@ -132,7 +139,11 @@ export default {
       dataVisible: false,
       questionVisible: false,
       commonProblem: "",
-      pageId:''
+      pageId: "",
+      fileName1:'',
+      type1:'',
+      fileName2:'',
+      type2:'',
     };
   },
   mounted() {
@@ -142,37 +153,37 @@ export default {
     this.getDetailInfo();
     this.getCompDataEval();
     this.getCompProblem();
-     
+    this.getCompDataName();
   },
   beforeDestroy() {
     // 离开页面的时候清除
     console.log("清除详情");
     this.util.clearBodyBackGround();
   },
-  updated(){
-    console.log("pageId",this.pageId)
-    if(this.pageId === '1'){
-        document.getElementById('dataIntro').style.height = document.getElementById('data').getBoundingClientRect().height+10+'px'
-        document.getElementById('submissionRule').style.height = document.getElementById('submission').getBoundingClientRect().height+10+'px'
-        document.getElementById('submissionExample').style.height = document.getElementById('example').getBoundingClientRect().height+10+'px'
-
-    }else{
-       document.getElementById('background').style.height = document.getElementById('back').getBoundingClientRect().height+10+'px'
-       document.getElementById('commIntro').style.height = document.getElementById('intro').getBoundingClientRect().height+10+'px'
-       document.getElementById('compRule').style.height = document.getElementById('rule').getBoundingClientRect().height+10+'px'
-
+  updated() {
+    console.log("pageId", this.pageId);
+    if (this.pageId === "1") {
+      var nodeList = Array.prototype.slice.call(
+        document.querySelectorAll(".set")
+      );
+      nodeList.forEach((item) => {
+        item.style.height =
+          item.firstChild.getBoundingClientRect().height + "px";
+      });
+      this.setDomHeight("dataIntro", "data");
+      this.setDomHeight("submissionRule", "submission");
+      this.setDomHeight("submissionExample", "example");
+    } else {
+      this.setDomHeight("background", "back");
+      this.setDomHeight("commIntro", "intro");
+      this.setDomHeight("compRule", "rule");
     }
-   
-    
-    
-
   },
   methods: {
     getDetailInfo() {
       axios
-        .post(
-          "http://175.24.79.108:8080/competition/getCompRule?compId=28"
-        )
+        .post("http://175.24.79.108:8080/competition/getCompRule?compId="+
+            this.$route.query.compId)
         .then((data) => {
           if (data.data.status === "1") {
             // console.log("比赛详情", data.data.compRule.compIntro);
@@ -180,9 +191,6 @@ export default {
             this.compBackGround = data.data.compRule.compBackGround;
             this.compRule = data.data.compRule.compRule;
             this.compSchedule = data.data.compRule.compSchedule;
-           console.log (document.getElementById('back').getBoundingClientRect().height+'px')
-           console.log (document.getElementById('intro').getBoundingClientRect().height+'px')
-           console.log (document.getElementById('rule').getBoundingClientRect().height+'px')
           }
         })
         .catch((error) => {
@@ -191,11 +199,10 @@ export default {
     },
     getCompDataEval: function () {
       axios
-        .post(
-          "http://175.24.79.108:8080/competition/getCompDataEval?compId=28"
-        )
+        .post("http://175.24.79.108:8080/competition/getCompDataEval?compId="+
+            this.$route.query.compId)
         .then((data) => {
-          console.log("获取数据与测评详细数据",data);
+          console.log("获取数据与测评详细数据", data);
           if (data.data.status === "1") {
             this.dataRule = data.data.compDataEval;
             console.log("1111", data.data.compDataEval.evalCriteria);
@@ -222,9 +229,8 @@ export default {
     },
     getCompProblem: function () {
       axios
-        .post(
-          "http://175.24.79.108:8080/competition/getCompProblem?compId=28"
-        )
+        .post("http://175.24.79.108:8080/competition/getCompProblem?compId="+
+            this.$route.query.compId)
         .then((data) => {
           console.log("常见问题详细数据");
           if (data.data.status === "1") {
@@ -232,6 +238,30 @@ export default {
               /\n/g,
               "<br/>"
             );
+          }
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getCompDataName: function () {
+      let getParams = {
+        compId: this.$route.query.compId,
+      };
+      axios
+        .post(
+          "http://175.24.79.108:8080/competition/getCompDataName",
+          getParams
+        )
+        .then((data) => {
+          console.log("数据集的详情", data);
+          if (data.data.status === "1") {
+            console.log(data.data);
+            this.fileName1 = data.data.testData.fileName;
+            this.type1 = data.data.testData.type;
+            this.fileName2 = data.data.trainData.fileName;
+            this.type2 = data.data.trainData.type
           }
           console.log(data);
         })
@@ -254,20 +284,58 @@ export default {
         this.ruleVisible = true;
         this.dataVisible = false;
         this.questionVisible = false;
-        this.pageId ="0"
+        this.pageId = "0";
       } else if (tabindex === "1") {
         this.ruleVisible = false;
         this.dataVisible = true;
         this.questionVisible = false;
-        this.pageId = "1"
+        this.pageId = "1";
       } else {
         this.ruleVisible = false;
         this.dataVisible = false;
         this.questionVisible = true;
-        this.pageId = "2"
+        this.pageId = "2";
       }
     },
+    setDomHeight(parent, child) {
+      document.getElementById(parent).style.height =
+        document.getElementById(child).getBoundingClientRect().height +
+        10 +
+        "px";
+    },
+    downCompData(fileName,type){
+      console.log(fileName)
+      console.log(type)
+       let getParams = {
+        compId:this.$route.query.compId,
+        fileName:fileName,
+        type:type,
+      };
+      axios
+        .post(
+          "http://175.24.79.108:8080/competition/downCompData",
+          getParams
+        )
+        .then((data) => {
+          console.log("下载详情", data);
+          // if (data.data.status === "1") {
+            console.log(data.data);
+            let url = window.URL.createObjectURL(new Blob([data.data]))
+     let a = document.createElement('a')
+     a.setAttribute("download",fileName)
+     a.href = url
+     a.click();
+          // }
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    
   },
+  
 };
 </script>
 <style scoped>
@@ -452,5 +520,38 @@ export default {
 }
 .is-active {
   border-bottom: 2px solid #1bb465;
+}
+.data-set p span:first-child {
+  font-weight: bolder;
+}
+.data-set p {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f9fafd;
+  /* width: 1020px; */
+}
+.data-set {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 15px;
+  /* margin-bottom: 5px; */
+  border-radius: 4px;
+  background-color: #fafafa;
+  /* padding-left: 20px; */
+}
+.setItem {
+  margin-top: 0vw;
+}
+.fa-download {
+    content: "\f019";
+}
+.setItem img{
+  width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-left: 30px;
+    /* padding-top: 10px; */
+    position: absolute;
+    top: 2px;
 }
 </style>

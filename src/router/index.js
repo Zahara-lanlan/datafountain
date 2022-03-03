@@ -81,8 +81,16 @@ export default new Router({
       },
     },
     {
-      path: "/test",
-      name: "testing",
+      path: "/upload",
+      name: "UploadData",
+      component: () => import("@/pages/upload-data.vue"),
+      meta: {
+        title: "上传数据集",
+      },
+    },
+    {
+      path: "/Test",
+      name: "",
       component: () => import("@/pages/test.vue"),
       meta: {
         title: "测试",

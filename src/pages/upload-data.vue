@@ -1,44 +1,17 @@
 <template>
   <div class="pub-content">
-    <p class="pub-title">设置常见问题</p>
+    <p class="pub-title">上传数据集</p>
 
     <div class="pub-item">
       <div class="pub-list">
-        <span>常见问题</span>
-        <!-- <input
-          type="textarea"
-          id="commonProblem"
-          placeholder="请输入常见问题"
-        /> -->
-        <textarea
-          id="commonProblem"
-          rows="15"
-          cols="30"
-          placeholder="请输入常见问题"
-        >
-        </textarea>
-      </div>
-      <!-- <div class="pub-list">
-        <span>比赛介绍</span>
-        <input type="text" placeholder="请输入比赛介绍" />
+        <span>训练集</span>
+        <input id="trainFile" type="file" placeholder="请输入比赛名称" />
       </div>
       <div class="pub-list">
-        <span>比赛日程</span>
-        <input
-          type="text"
-          placeholder="请输入比赛日程"
-          style="margin-left: 14px"
-        />
+        <span>测试集</span>
+        <input type="file" id="testFile" placeholder="请输入比赛类型" />
       </div>
-      <div class="pub-list">
-        <span>比赛规则</span>
-        <input
-          type="text"
-          placeholder="请输入比赛规则"
-          style="margin-left: 14px"
-        />
-      </div> -->
-      <button class="confirm" @click="submitInfo">下一步</button>
+      <button class="confirm" @click="sumbitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -46,29 +19,31 @@
 <script>
 import axios from "axios";
 export default {
-  name: "SetRule",
+  name: "UploadData",
   data() {
     return {
       bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
     };
   },
   methods: {
-    submitInfo() {
-      let params = {
-        compId: this.$router.query("compId"),
-        // compId: "31",
-        commonProblem: document.getElementById("commonProblem").value,
-      };
+    sumbitInfo() {
+       var myFormData = new FormData();
+
+        myFormData.append('uploadTrainFile',document.getElementById('trainFile').files[0]);
+        myFormData.append('uploadTestFile',document.getElementById('testFile').files[0]);
+        myFormData.append('compId','31');
+      // let params = {
+      //   compId: '31',
+      //   //  compId: this.$router.query("compId"),
+      //   uploadTrainFile: document.getElementById('trainFile').files[0],
+      //   uploadTestFile: document.getElementById('testFile').files[0],
+      // };
       axios
-        .post("http://175.24.79.108:8080/competition/setCompProblem", params)
+        .post("http://175.24.79.108:8080/competition/uploadCompData", myFormData)
         .then((data) => {
           if (data.data.status == "1") {
-            alert("比赛常见问题更新成功");
-            console.log("比赛常见问题更新成功");
-            // this.$router.push({
-            //   path: "/setquestion",
-            //   query: { compId: this.$router.query("compId") },
-            // });
+            console.log("上传数据成功");
+          
           }
           console.log(data);
         })
@@ -106,8 +81,9 @@ export default {
   color: #1a1a1a;
 }
 .pub-list {
-  /* border-bottom: 1px solid #eceeef; */
+  border-bottom: 1px solid #eceeef;
   margin-top: 5px;
+  padding-bottom: 10px;
 }
 .pub-item {
   border-radius: 8px;
@@ -129,23 +105,17 @@ export default {
   padding-top: -5px;
   display: inline-block;
   margin-left: 25px;
-  width: 100px;
   /* border: 1px solid red; */
 }
-.pub-list textarea {
-  font-size: 2.13333vw;
+.pub-list input {
+  font-size: 16px;
   color: #a8adb2;
   transform: scale(0.5, 0.5);
   transform-origin: left;
   border: none;
-  margin-left: 45px;
+  margin-left: 140px;
   outline: none;
-  width: 500px;
-  margin-top: -8.6vw;
-  border: 1px solid #eceeef;
-  padding: 15px;
 }
-
 .confirm {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
@@ -160,8 +130,7 @@ export default {
   transform-origin: left;
   width: 220px;
   height: 40px;
-  margin-top: -7.66667vw;
-  margin-left: 16vw;
-  position: absolute;
+  margin-top: 10px;
+  margin-left: 120px;
 }
 </style>
