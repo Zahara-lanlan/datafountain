@@ -63,12 +63,12 @@ export default {
         .post("http://175.24.79.108:8080/competition/setCompProblem", params)
         .then((data) => {
           if (data.data.status == "1") {
-            alert("比赛常见问题更新成功");
+            // alert("比赛常见问题更新成功");
             console.log("比赛常见问题更新成功");
-            // this.$router.push({
-            //   path: "/setquestion",
-            //   query: { compId: this.$router.query("compId") },
-            // });
+            this.$router.push({
+              path: "/upload",
+              query: { compId: this.$router.query("compId") },
+            });
           }
           console.log(data);
         })

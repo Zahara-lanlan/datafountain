@@ -31,7 +31,8 @@ export default {
 
         myFormData.append('uploadTrainFile',document.getElementById('trainFile').files[0]);
         myFormData.append('uploadTestFile',document.getElementById('testFile').files[0]);
-        myFormData.append('compId','31');
+        // myFormData.append('compId','31');
+         myFormData.append('compId',this.$router.query("compId"));
       // let params = {
       //   compId: '31',
       //   //  compId: this.$router.query("compId"),
@@ -42,6 +43,7 @@ export default {
         .post("http://175.24.79.108:8080/competition/uploadCompData", myFormData)
         .then((data) => {
           if (data.data.status == "1") {
+            alert('上传数据成功')
             console.log("上传数据成功");
           
           }
