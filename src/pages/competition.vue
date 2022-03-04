@@ -61,79 +61,18 @@ export default {
       competList: [
         {
           img: "https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg",
-          compType: "大奖赛",
-          name: "AI based Channel Modeling and Generating",
-          cmpUnit: "组织单位：OPPO",
-          cmpDate: "比赛日期：2021.12.24-2022.03.11",
-          cmpMoney: "￥500,000",
-          tagList: [
-            {
-              name: "智能算法",
-            },
-            {
-              name: "数据增强",
-            },
-            {
-              name: "生成反对抗网络GAN",
-            },
-          ],
+        
         },
         {
           img: require("./../assets/img/traffic.png"),
-          compType: "训练赛",
-          name: "交通标志分类识别",
-          cmpUnit: "组织单位：中国计算机协会",
-          cmpDate: "比赛日期：2021.12.24-2022.03.11",
-          cmpMoney: "￥800,000",
-          tagList: [
-            {
-              name: "智能算法",
-            },
-            {
-              name: "图像分类",
-            },
-            {
-              name: "目标检测",
-            },
-          ],
         },
         {
           img: require("./../assets/img/game.jpg"),
-          compType: "大奖赛",
-          name: "AI球球大作战：Go-Bigger多智能体决策智能挑战赛",
-          cmpUnit: "组织单位： OpenDILab",
-          cmpDate: "比赛日期： 2021.11.08 - 2022.04.30",
-          cmpMoney: "￥150,000",
-          tagList: [
-            {
-              name: "智能算法",
-            },
-            {
-              name: "游戏AI",
-            },
-            {
-              name: "其他",
-            },
-          ],
+        
         },
         {
           img: require("./../assets/img/game.jpg"),
-          compType: "大奖赛",
-          name: "AI球球大作战：Go-Bigger多智能体决策智能挑战赛",
-          cmpUnit: "组织单位： OpenDILab",
-          cmpDate: "比赛日期： 2021.11.08 - 2022.04.30",
-          cmpMoney: "￥150,000",
-          tagList: [
-            {
-              name: "智能算法",
-            },
-            {
-              name: "游戏AI",
-            },
-            {
-              name: "其他",
-            },
-          ],
+       
         },
       ],
     };

@@ -29,10 +29,16 @@
           <li tabindex="2" @click="changeDetailInfo">
             <span class="el-menu-item">常见问题</span>
           </li>
+          <li tabindex="3" @click="changeDetailInfo">
+            <span class="el-menu-item">排行榜</span>
+          </li>
+          <li tabindex="4" @click="changeDetailInfo">
+            <span class="el-menu-item">参赛队伍</span>
+          </li>
         </ul>
-        <!-- <button class="btn-enroll">报名参赛</button> -->
       </div>
       <div class="page-content">
+        <!-- 赛制规则  -->
         <div v-show="ruleVisible">
           <div id="background">
             <p id="back">
@@ -62,7 +68,7 @@
             </p>
           </div>
         </div>
-        <!-- 提交要求，提交实例，评测标准  -->
+        <!-- 数据与评测  -->
         <div v-show="dataVisible">
           <div class="data-set" v-show="setVisiable">
             <div class="set">
@@ -118,11 +124,79 @@
             </p>
           </div>
         </div>
+        <!-- 常见问题  -->
         <div v-show="questionVisible">
           <p>
             <span class="page-title">常见问题</span>
             <span v-html="commonProblem"></span>
           </p>
+        </div>
+        <!-- 排行榜  -->
+        <div v-show="rankVisible">
+          <table id="tbl" width="400" cellpadding="0" cellspacing="0">
+            <thead>
+              <tr>
+                <th>
+                  <div class="table_header">
+                    <span>排名</span>
+                  </div>
+                </th>
+                <th>
+                  <div class="table_header">
+                    <span>提交队伍</span>
+                  </div>
+                </th>
+                <th>
+                  <div class="table_header">
+                    <span>提交时间</span>
+                  </div>
+                </th>
+                <th>
+                  <div class="table_header">
+                    <span>最高得分</span>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item of rankData" :key="item.id">
+                <td>
+                  <div class="table_container">
+                    <span>{{ item.rank }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="table_container">
+                    <span>{{ item.submitTeam }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="table_container">
+                    <span>{{ item.submitTime }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="table_container">
+                    <span>{{ item.highScore }}</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- 参赛队伍  -->
+        <div v-show="teamVisible" class="team">
+          <div class="team-container" v-for="item of teamData" :key="item.id">
+            <img :src="item.img" alt="" />
+            <div class="team-item">
+              <div class="team-name">
+                <span>{{ item.name }}</span>
+              </div>
+              <div class="team-slogan">
+                <span>{{ item.slogan }}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -157,6 +231,10 @@ export default {
       fileName2: "",
       type2: "",
       setVisiable: false,
+      rankVisible: false,
+      teamVisible: false,
+      rankData: "",
+      teamData: "",
     };
   },
   mounted() {
@@ -167,6 +245,54 @@ export default {
     this.getCompDataEval();
     this.getCompProblem();
     this.getCompDataName();
+    this.rankData = [
+      {
+        rank: 1,
+        submitTeam: "阳光炼丹炉",
+        submitTime: "2022-03-03 11:27",
+        highScore: 0.7437505,
+      },
+      {
+        rank: 2,
+        submitTeam: "尼古拉斯-土土",
+        submitTime: "2022-03-09 23:27",
+        highScore: 0.9437505,
+      },
+      {
+        rank: 3,
+        submitTeam: "代码搬运工",
+        submitTime: "2022-03-14 23:27",
+        highScore: 0.8437505,
+      },
+      {
+        rank: 4,
+        submitTeam: "我吃西红柿",
+        submitTime: "2022-03-08 16:27",
+        highScore: 0.5437505,
+      },
+    ];
+    this.teamData = [
+      {
+        img: require("./../assets/img/pro1.jpeg"),
+        name: "阳光炼丹炉",
+        slogan: "加油干鸭",
+      },
+      {
+        img: require("./../assets/img/pro2.jpeg"),
+        name: "尼姑拉斯-土土",
+        slogan: "这个家伙很懒，还没留下任何宣言~",
+      },
+      {
+        img: require("./../assets/img/pro3.jpeg"),
+        name: "代码搬运工",
+        slogan: "这个家伙很懒，还没留下任何宣言~",
+      },
+      {
+        img: require("./../assets/img/pro4.jpeg"),
+        name: "我吃西红柿",
+        slogan: "这个家伙很懒，还没留下任何宣言~",
+      },
+    ];
   },
   beforeDestroy() {
     // 离开页面的时候清除
@@ -305,21 +431,47 @@ export default {
         .querySelector(".el-menu-item")
         .classList.add("is-active");
       let tabindex = event.currentTarget.getAttribute("tabindex");
-      if (tabindex === "0") {
-        this.ruleVisible = true;
-        this.dataVisible = false;
-        this.questionVisible = false;
-        this.pageId = "0";
-      } else if (tabindex === "1") {
-        this.ruleVisible = false;
-        this.dataVisible = true;
-        this.questionVisible = false;
-        this.pageId = "1";
-      } else {
-        this.ruleVisible = false;
-        this.dataVisible = false;
-        this.questionVisible = true;
-        this.pageId = "2";
+      switch (tabindex) {
+        case "0":
+          this.ruleVisible = true;
+          this.dataVisible = false;
+          this.questionVisible = false;
+          this.rankVisible = false;
+          this.teamVisible = false;
+          this.pageId = "0";
+          break;
+        case "1":
+          this.ruleVisible = false;
+          this.dataVisible = true;
+          this.questionVisible = false;
+          this.rankVisible = false;
+          this.teamVisible = false;
+          this.pageId = "1";
+          break;
+        case "2":
+          this.ruleVisible = false;
+          this.dataVisible = false;
+          this.questionVisible = true;
+          this.rankVisible = false;
+          this.teamVisible = false;
+          this.pageId = "2";
+          break;
+        case "3":
+          this.ruleVisible = false;
+          this.dataVisible = false;
+          this.questionVisible = false;
+          this.rankVisible = true;
+          this.teamVisible = false;
+          this.pageId = "3";
+          break;
+        case "4":
+          this.ruleVisible = false;
+          this.dataVisible = false;
+          this.questionVisible = false;
+          this.rankVisible = false;
+          this.teamVisible = true;
+          this.pageId = "4";
+          break;
       }
     },
     setDomHeight(parent, child) {
@@ -502,23 +654,50 @@ export default {
   display: inline-block;
   transform: scale(0.5);
 }
-.page-content p {
+.page-content {
+  margin-left: 20px;
+}
+.page-content p,
+.table_header span,
+.table_container span,
+.team-slogan span {
   color: inherit;
   font-family: inherit;
   font-size: 1.6vw;
   line-height: 2em;
   display: inline-block;
-  /* border: 1px solid red; */
   transform: scale(0.5, 0.5);
-  transform-origin: left top;
-  width: 1000px;
-  /* margin-left: -450px;  */
-  /* margin-top: -11vw; */
-  /* width: 100%; */
-  /* height: 100%; */
-  position: relative;
-  /* left: 227px; */
 }
+.page-content p,
+.team-slogan span {
+  transform-origin: left top;
+  width: 129.2vw;
+  position: relative;
+}
+.table_header span,
+.table_container span,
+.team-slogan span {
+  /* margin-top: 3px; */
+
+  height: 20px;
+  color: #909399;
+}
+.table_container span {
+  color: #666;
+}
+.table_header div,
+.table_container div,
+.team-slogan {
+  height: 20px;
+}
+#tbl {
+  margin: 20px;
+  margin-left: 30px;
+}
+#tbl tr {
+  text-align: center;
+}
+
 .btn-enroll {
   display: inline-block;
   background-color: #2979ff;
@@ -561,9 +740,6 @@ export default {
 .setItem {
   margin-top: 0vw;
 }
-.fa-download {
-  content: "\f019";
-}
 .setItem img {
   width: 20px;
   height: 20px;
@@ -572,5 +748,36 @@ export default {
   /* padding-top: 10px; */
   position: absolute;
   top: 2px;
+}
+.team {
+  margin-top: 20px;
+}
+.team-name span {
+  color: #333;
+  font-size: 18px;
+  transform: scale(0.5, 0.5);
+  transform-origin: left top;
+  display: inline-block;
+  height: 20px;
+}
+.team-name {
+  height: 15px;
+}
+.team-container {
+  display: flex;
+  margin-top: 8px;
+  border: 0.5px solid #f5f5f5;
+  padding-left: 32px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.team-container img {
+  width: 40px;
+  height: 40px;
+  padding-top: 2.5px;
+}
+.team-item {
+  padding-top: 5px;
+  padding-left: 10px;
 }
 </style>
