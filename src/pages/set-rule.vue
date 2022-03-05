@@ -67,7 +67,7 @@ export default {
         .post("http://175.24.79.108:8080/competition/setCompRule", params)
         .then((data) => {
           if (data.data.status == "1") {
-            console.log("创建比赛成功");
+            console.log("创建规则成功");
             this.$router.push({
               path: "/setdata",
               query: { compId: this.$router.query("compId") },

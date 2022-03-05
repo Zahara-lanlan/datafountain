@@ -4,17 +4,16 @@
       class="compt-item"
       v-for="item of competList"
       :key="item.key"
-      @click="handelDetails(item.compId, item.name)"
+      @click="handelDetails(item.compId, item.name, item.compType)"
     >
-      <div class="compt__avatar-container">
+      <!-- <div class="compt__avatar-container">
         <img
           src="https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg"
           class="compt__avatar"
         />
-      </div>
+      </div> -->
       <div class="compt-info">
         <div class="compt__header">
-          <span class="compt__cmpt-type">{{ item.compType }}</span>
           <a
             class="el-tooltip compt__title item"
             aria-describedby="el-tooltip-2560"
@@ -22,28 +21,16 @@
           >
             {{ item.name }}
           </a>
+          <span class="compt__cmpt-type">{{ item.compType }}</span>
         </div>
         <div class="compt__summary">
-          <div class="compt__sponsor">
+          <!-- <div class="compt__sponsor">
             <span> {{ item.cmpUnit }}</span>
-          </div>
+          </div> -->
           <div class="compt__oview">
             <div class="cmp-date">
               比赛日期: {{ item.startDate }}-{{ item.endDate }}
             </div>
-            <div class="oview-right">{{ item.cmpMoney }}</div>
-          </div>
-        </div>
-        <div class="compt-item-bottom">
-          <div class="cmp-tags">
-            <span
-              class="compt__tag tag"
-              v-for="tagItem of item.tagList"
-              :key="tagItem.key"
-            >
-              <img src="./../assets/img/icon.png" alt="" />
-              <span>{{ tagItem.name }}</span>
-            </span>
           </div>
         </div>
       </div>
@@ -61,18 +48,15 @@ export default {
       competList: [
         {
           img: "https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg",
-        
         },
         {
           img: require("./../assets/img/traffic.png"),
         },
         {
           img: require("./../assets/img/game.jpg"),
-        
         },
         {
           img: require("./../assets/img/game.jpg"),
-       
         },
       ],
     };
@@ -83,11 +67,11 @@ export default {
     this.getCompetitioninfo();
   },
   methods: {
-    handelDetails(compId, name) {
+    handelDetails(compId, name, compType) {
       console.log("比赛id是", name);
       this.$router.push({
         path: "/detail",
-        query: { compId: compId, name: name },
+        query: { compId: compId, name: name, compType: compType },
       });
     },
     getCompetitioninfo() {
@@ -123,6 +107,9 @@ export default {
 };
 </script>
 <style scoped>
+.compt__header {
+  padding-left: 11px;
+}
 .cmpt-container {
   margin-left: 100px;
   width: 77.33333vw;
@@ -135,7 +122,7 @@ export default {
   background: #fff;
   /* min-height: 150px; */
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   position: relative;
   overflow: hidden;
   border: 1px solid #f5f5f5;
@@ -159,18 +146,19 @@ export default {
   width: 400px;
 }
 .compt__cmpt-type {
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
   height: 20px;
+  /* width: 40px; */
   line-height: 20px;
-  background: #f8f9fc;
-  border-radius: 1px;
-  border: 1px solid #dde2e7;
+  border-radius: 3px;
+  /* border: 1px solid #dde2e7; */
+  background-color: rgb(135, 208, 104);
   font-size: 12px;
-  transform: scale(0.6);
+  transform: scale(0.5);
   font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #a9b2c6;
+  /* font-weight: 400; */
+  color: #fff;
   text-align: center;
   vertical-align: top;
   display: inline-block;
@@ -198,21 +186,9 @@ export default {
   width: 400px;
   margin-top: -5px;
 }
-.compt__sponsor span {
-  font-size: 12px;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #666;
-  transform: scale(0.7);
-  text-align: left;
-  display: inline-block;
-  margin-left: -50px;
-  width: 400px;
-  /* border: 1px solid red; */
-}
 .compt__oview {
   display: flex;
-  width: 400px;
+  width: 600px;
   margin-top: -5px;
 }
 
@@ -225,51 +201,5 @@ export default {
   transform-origin: left;
   display: inline-block;
   margin-left: 1.53333vw;
-}
-.oview-right {
-  font-size: 16px;
-  transform: scale(0.6);
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  color: #ff5602;
-  margin-left: 100px;
-}
-.compt-item-bottom {
-  width: 400px;
-  height: 20px;
-  /* border: 1px solid red; */
-  border-top: 1px solid #f3f3f3;
-}
-.cmp-tags {
-  float: left;
-  max-width: 400px;
-  overflow: hidden;
-  max-height: 22px;
-}
-.compt__tag {
-  color: #6a9ee8;
-  background: #f3f7fb;
-}
-.tag {
-  display: block;
-  float: left;
-  padding: 0 10px 0 7px;
-  font-size: 12px;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #85a5ff;
-  background: #f0f5ff;
-  border-radius: 11px;
-  height: 22px;
-  line-height: 22px;
-  transform: scale(0.5);
-  margin-left: -20px;
-}
-.tag img {
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
-  margin-right: 3px;
-  margin-top: -3px;
 }
 </style>

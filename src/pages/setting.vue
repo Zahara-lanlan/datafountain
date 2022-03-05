@@ -60,6 +60,8 @@ export default {
               path: "/setrule",
               query: { compId: data.data.compId },
             });
+          } else {
+            console.log(data.data.msg);
           }
           console.log(data);
         })

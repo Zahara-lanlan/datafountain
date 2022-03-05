@@ -2,17 +2,18 @@
   <div class="container">
     <div class="cmpt-container">
       <div class="competition-wrapper">
-        <div class="competition__avatar">
+        <!-- <div class="competition__avatar">
           <img src="./../assets/img/game.jpg" />
-        </div>
+        </div> -->
         <div class="competition-info">
           <div class="competition__survey">
             <h2 class="competition__title">
               {{ this.name }}
             </h2>
+            <span class="compt__cmpt-type">{{ this.compyType }}</span>
           </div>
           <div class="competition__sponsor inline-vcenter">
-            <span> {{ this.compBackGround }} </span>
+            <p>{{ this.compBackGround }}</p>
           </div>
         </div>
       </div>
@@ -212,6 +213,7 @@ export default {
       bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
       compId: this.$route.query.compId,
       name: this.$route.query.name,
+      compyType: this.$route.query.compType,
       compBackGround: "", //大赛背景
       compIntro: "", //赛题介绍
       compRule: "", //赛制规则
@@ -569,7 +571,7 @@ export default {
 .competition__survey {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -577,16 +579,16 @@ export default {
 }
 .competition__title {
   margin: 0;
-  font-size: 20px;
+  font-size: 12px;
   line-height: 1.5em;
   color: #333;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display: inline-block;
-  transform: scale(0.5, 0.5);
+  /* transform: scale(0.5, 0.5); */
   margin-left: 1.73333vw;
-  transform-origin: left;
+  /* transform-origin: left; */
 }
 .page-title {
   font-family: PingFangSC-Medium;
@@ -609,21 +611,22 @@ export default {
 }
 .competition__sponsor {
   margin-top: -3vw;
-  display: flex;
+  /* display: flex; */
+  padding-left: 20px;
 }
 .competition__sponsor-icon {
   margin-left: -9.26667vw;
 }
-.competition__sponsor span {
+.competition__sponsor p {
   font-size: 1.26667vw;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #888;
-  /* line-height: 20px; */
+  line-height: 20px;
   display: inline-block;
   transform: scale(0.6, 0.6);
   transform-origin: left;
-  /* width: 307px; */
+  width: 707px;
   margin-left: 1.83333vw;
 }
 
@@ -779,5 +782,25 @@ export default {
 .team-item {
   padding-top: 5px;
   padding-left: 10px;
+}
+.compt__cmpt-type {
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 3px;
+  margin-left: 20px;
+  margin-top: 2px;
+  /* border: 1px solid #dde2e7; */
+  border: none;
+  background-color: rgb(135, 208, 104);
+  font-size: 12px;
+  transform: scale(0.8);
+  transform-origin: left top;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: #fff;
+  text-align: center;
+  vertical-align: top;
+  display: inline-block;
 }
 </style>
