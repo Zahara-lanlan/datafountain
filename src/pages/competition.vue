@@ -6,12 +6,6 @@
       :key="item.key"
       @click="handelDetails(item.compId, item.name, item.compType)"
     >
-      <!-- <div class="compt__avatar-container">
-        <img
-          src="https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg"
-          class="compt__avatar"
-        />
-      </div> -->
       <div class="compt-info">
         <div class="compt__header">
           <a
@@ -24,9 +18,6 @@
           <span class="compt__cmpt-type">{{ item.compType }}</span>
         </div>
         <div class="compt__summary">
-          <!-- <div class="compt__sponsor">
-            <span> {{ item.cmpUnit }}</span>
-          </div> -->
           <div class="compt__oview">
             <div class="cmp-date">
               比赛日期: {{ item.startDate }}-{{ item.endDate }}
@@ -46,18 +37,18 @@ export default {
     return {
       bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
       competList: [
-        {
-          img: "https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg",
-        },
-        {
-          img: require("./../assets/img/traffic.png"),
-        },
-        {
-          img: require("./../assets/img/game.jpg"),
-        },
-        {
-          img: require("./../assets/img/game.jpg"),
-        },
+        // {
+        //   img: "https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg",
+        // },
+        // {
+        //   img: require("./../assets/img/traffic.png"),
+        // },
+        // {
+        //   img: require("./../assets/img/game.jpg"),
+        // },
+        // {
+        //   img: require("./../assets/img/game.jpg"),
+        // },
       ],
     };
   },
@@ -65,8 +56,36 @@ export default {
     console.log("初始化列表");
     this.util.setBodyBackGround();
     this.getCompetitioninfo();
+    window.addEventListener("scroll", this.scrollMethod);
   },
   methods: {
+    scrollMethod() {
+      console.log("滚动监听");
+      console.log(document.documentElement.scrollTop);
+      if (
+        document.documentElement.scrollTop + window.innerHeight + 1 >=
+        document.body.scrollHeight
+      ) {
+        console.log("拉到底了");
+        axios
+          .post("http://175.24.79.108:8080/competition/getCompList", {
+            page: "2",
+          })
+          .then((data) => {
+            console.log("获取的数据1111");
+            if (data.data.status === "1") {
+              this.competList = this.competList.concat(data.data.compList);
+              console.log(this.competList);
+              window.removeEventListener("scroll", this.scrollMethod);
+            }
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+
     handelDetails(compId, name, compType) {
       console.log("比赛id是", name);
       this.$router.push({
@@ -104,6 +123,9 @@ export default {
     console.log("清除列表");
     this.util.clearBodyBackGround();
   },
+  scrollDs() {
+    console.log("滑动事件");
+  },
 };
 </script>
 <style scoped>
@@ -114,24 +136,20 @@ export default {
   margin-left: 100px;
   width: 77.33333vw;
   height: 100%;
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 
-  /* border: 1px solid red; */
 }
 .compt-item {
   background: #fff;
-  /* min-height: 150px; */
   width: 100%;
   margin-bottom: 7px;
   position: relative;
   overflow: hidden;
   border: 1px solid #f5f5f5;
   display: flex;
-  /* padding-top: 20px; */
 }
 .compt__avatar {
-  /* height: 120px;
-  width: 160px; */
   height: 82px;
   width: 120px;
 }
@@ -149,23 +167,18 @@ export default {
   padding-left: 12px;
   padding-right: 12px;
   height: 20px;
-  /* width: 40px; */
   line-height: 20px;
   border-radius: 3px;
-  /* border: 1px solid #dde2e7; */
   background-color: rgb(135, 208, 104);
   font-size: 12px;
   transform: scale(0.5);
   font-family: PingFangSC-Regular, PingFang SC;
-  /* font-weight: 400; */
   color: #fff;
   text-align: center;
   vertical-align: top;
   display: inline-block;
-  /* margin-right: 8px; */
 }
 .compt__title {
-  /* border: 1px solid red; */
   max-width: 100%;
   display: inline-block;
   overflow: hidden;
@@ -181,8 +194,6 @@ export default {
   /* margin-left: -26px; */
 }
 .compt__summary {
-  /* border: 1px solid red; */
-  /* margin-top: 5px; */
   width: 400px;
   margin-top: -5px;
 }

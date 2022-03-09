@@ -17,7 +17,7 @@
           type="text"
           id="startDate"
           placeholder="请输入比赛开始时间"
-          style="margin-left: 14px"
+          style="margin-left: -20px"
         />
       </div>
       <div class="pub-list">
@@ -26,7 +26,7 @@
           type="text"
           id="endDate"
           placeholder="请输入比赛结束时间"
-          style="margin-left: 14px"
+          style="margin-left: -20px"
         />
       </div>
       <button class="confirm" @click="sumbitInfo">下一步</button>
@@ -125,13 +125,21 @@ export default {
   /* border: 1px solid red; */
 }
 .pub-list input {
-  font-size: 16px;
-  color: #a8adb2;
-  transform: scale(0.5, 0.5);
-  transform-origin: left;
-  border: none;
-  margin-left: 45px;
-  outline: none;
+  font-size: 2.13333vw;
+    color: #a8adb2;
+    /* transform: scale(0.5, 0.5); */
+    transform-origin: left;
+    border: none;
+    margin-left: 6vw;
+    /* width: 29.33333vw; */
+    outline: none;
+    zoom: .5;
+    width: 400px;
+    /* border: 1px solid red; */
+    position: absolute;
+    top: px;
+    margin-top: 15px;
+
 }
 .confirm {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */

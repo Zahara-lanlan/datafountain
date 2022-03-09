@@ -43,29 +43,29 @@
         <div v-show="ruleVisible">
           <div id="background">
             <p id="back">
-              <span class="page-title">大赛背景</span>
-              <span>{{ this.compBackGround }}</span>
+              <i class="bg-img"></i><span class="page-title">大赛背景</span>
+              <span class="page-text">{{ this.compBackGround }}</span>
             </p>
           </div>
 
           <div id="commIntro">
             <p id="intro">
-              <span class="page-title">赛题介绍</span>
-              <span>{{ this.compIntro }}</span>
+              <i class="bg-img"></i><span class="page-title">赛题介绍</span>
+              <span class="page-text">{{ this.compIntro }}</span>
             </p>
           </div>
 
           <div id="compRule">
             <p id="rule">
-              <span class="page-title">赛制规则</span>
-              <span>{{ this.compRule }}</span>
+              <i class="bg-img"></i><span class="page-title">赛制规则</span>
+              <span class="page-text">{{ this.compRule }}</span>
             </p>
           </div>
 
           <div id="compSchedule">
             <p id="schedule">
-              <span class="page-title">参赛规则</span>
-              <span>{{ this.compSchedule }}</span>
+              <i class="bg-img"></i><span class="page-title">参赛规则</span>
+              <span class="page-text">{{ this.compSchedule }}</span>
             </p>
           </div>
         </div>
@@ -99,37 +99,37 @@
           </div>
           <div id="dataIntro">
             <p id="data">
-              <span class="page-title">数据说明</span>
-              <span v-html="dataIntro"></span>
+              <i class="bg-img"></i><span class="page-title">数据说明</span>
+              <span v-html="dataIntro" class="page-text"></span>
             </p>
           </div>
 
           <div id="submissionRule">
             <p id="submission">
-              <span class="page-title">提交要求</span>
-              <span v-html="submissionRule"></span>
+              <i class="bg-img"></i><span class="page-title">提交要求</span>
+              <span v-html="submissionRule" class="page-text"></span>
             </p>
           </div>
 
           <div id="submissionExample">
             <p id="example">
-              <span class="page-title">提交实例</span>
-              <span v-html="submissionExample"></span>
+              <i class="bg-img"></i><span class="page-title">提交实例</span>
+              <span v-html="submissionExample" class="page-text"></span>
             </p>
           </div>
 
           <div id="evalCriteria">
             <p id="criteria">
-              <span class="page-title">评测标准</span>
-              <span v-html="evalCriteria"></span>
+              <i class="bg-img"></i> <span class="page-title">评测标准</span>
+              <span v-html="evalCriteria" class="page-text"></span>
             </p>
           </div>
         </div>
         <!-- 常见问题  -->
         <div v-show="questionVisible">
           <p>
-            <span class="page-title">常见问题</span>
-            <span v-html="commonProblem"></span>
+            <i class="bg-img"></i><span class="page-title">常见问题</span>
+            <span v-html="commonProblem" class="page-text"></span>
           </p>
         </div>
         <!-- 排行榜  -->
@@ -314,10 +314,13 @@ export default {
       this.setDomHeight("dataIntro", "data");
       this.setDomHeight("submissionRule", "submission");
       this.setDomHeight("submissionExample", "example");
+      this.setDomHeight("evalCriteria","criteria")
     } else {
       this.setDomHeight("background", "back");
       this.setDomHeight("commIntro", "intro");
       this.setDomHeight("compRule", "rule");
+      this.setDomHeight("compSchedule", "schedule");
+      
     }
   },
   methods: {
@@ -566,7 +569,7 @@ export default {
   /* margin-left: 260px; */
   padding-left: 24px;
   /* border: 1px solid red; */
-  height: 94px;
+  /* height: 94px; */
 }
 .competition__survey {
   display: -webkit-box;
@@ -591,14 +594,15 @@ export default {
   /* transform-origin: left; */
 }
 .page-title {
+  margin-bottom: 12px;
   font-family: PingFangSC-Medium;
   font-size: 2.16667vw;
   color: #1a1a1a;
   letter-spacing: 0;
   /* line-height: 40px; */
-  /* margin-left: 30px; */
+  margin-left: 11px;
   /* margin-top: 10px; */
-  display: block;
+  display: inline-block;
 }
 
 .compt__sponsor-icon {
@@ -668,7 +672,7 @@ export default {
   font-family: inherit;
   font-size: 1.6vw;
   line-height: 2em;
-  display: inline-block;
+  display: block;
   transform: scale(0.5, 0.5);
 }
 .page-content p,
@@ -802,5 +806,20 @@ export default {
   text-align: center;
   vertical-align: top;
   display: inline-block;
+}
+.bg-img {
+  margin-top: 3px;
+  height: 20px;
+  width: 4px;
+  /* border: 1.5px solid #5a92b7; */
+  position: absolute;
+  /* background: rgb(135, 208, 104); */
+  background: #5a92b7;
+  /* background-position: 0 0; */
+  border: none;
+  outline: none;
+}
+.page-text {
+  display: block;
 }
 </style>
