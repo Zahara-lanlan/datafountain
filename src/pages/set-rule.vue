@@ -86,13 +86,13 @@ export default {
     // 进来的时候调用添加
     console.log("初始化登录");
     console.log(this.$route.query.compId);
-    this.util.setBodyBackGround();
+    // this.util.setBodyBackGround();
   },
-  beforeDestroy() {
-    // 离开页面的时候清除
-    console.log("清除页面登录");
-    this.util.clearBodyBackGround();
-  },
+  // beforeDestroy() {
+  //   // 离开页面的时候清除
+  //   console.log("清除页面登录");
+  //   this.util.clearBodyBackGround();
+  // },
 };
 </script>
 <style>
@@ -100,8 +100,7 @@ export default {
   margin: auto;
   background: #ffffff;
   padding: 30px;
-  margin-top: 8vw;
-  /* margin-top: 20px; */
+  margin-top: 20px;
   width: 520px;
   border: 0.13333vw solid #f5f5f5;
   margin-bottom: 2.66667vw;

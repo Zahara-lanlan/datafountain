@@ -134,25 +134,25 @@
         </div>
         <!-- 排行榜  -->
         <div v-show="rankVisible">
-          <table id="tbl" width="440" cellpadding="0" cellspacing="0">
+          <table id="tbl" class="tbl" cellpadding="0" cellspacing="0">
             <thead>
               <tr>
-                <th>
+                <th class="th1">
                   <div class="table_header">
                     <span>排名</span>
                   </div>
                 </th>
-                <th>
+                <th class="th2">
                   <div class="table_header">
                     <span>提交队伍</span>
                   </div>
                 </th>
-                <th>
+                <th class="th3">
                   <div class="table_header">
                     <span>提交时间</span>
                   </div>
                 </th>
-                <th>
+                <th class="th4">
                   <div class="table_header">
                     <span>最高得分</span>
                   </div>
@@ -698,30 +698,12 @@ export default {
 }
 #tbl {
   margin: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 #tbl tr {
   text-align: center;
 }
 
-.btn-enroll {
-  display: inline-block;
-  background-color: #2979ff;
-  color: #fff;
-  cursor: pointer;
-  /* width: 100%; */
-  text-align: center;
-  font-size: 16px;
-  min-width: 120px;
-
-  height: 50px;
-  line-height: 50px;
-  border: none;
-  outline: none;
-  transform: scale(0.5);
-  margin-left: 250px;
-  margin-top: -15px;
-}
 .is-active {
   border-bottom: 2px solid #1bb465;
 }
@@ -820,5 +802,20 @@ export default {
 }
 .page-text {
   display: block;
+}
+.tbl {
+  width: 440px;
+}
+.th1 {
+  width: 60px;
+}
+.th2 {
+  width: 140px;
+}
+.th3 {
+  width: 130px;
+}
+.th4 {
+  width: 110px;
 }
 </style>
