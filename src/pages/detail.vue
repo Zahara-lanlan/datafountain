@@ -379,7 +379,8 @@ export default {
     getCompProblem: function () {
       axios
         .post(
-          "http://175.24.79.108:8080/competition/getCompProblem?compId=" +
+          this.util.BASE_URL +
+            "/competition/getCompProblem?compId=" +
             this.$route.query.compId
         )
         .then((data) => {

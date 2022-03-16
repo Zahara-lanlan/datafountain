@@ -66,7 +66,7 @@ export default {
       };
       // this.$router.push({ path: "/setquestion" });
       axios
-        .post("http://175.24.79.108:8080/competition/setCompDataEval", params)
+        .post(this.util.BASE_URL + "/competition/setCompDataEval", params)
         .then((data) => {
           if (data.data.status == "1") {
             console.log("设置数据成功");
