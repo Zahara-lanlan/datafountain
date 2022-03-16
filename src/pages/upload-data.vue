@@ -27,12 +27,18 @@ export default {
   },
   methods: {
     sumbitInfo() {
-       var myFormData = new FormData();
+      var myFormData = new FormData();
 
-        myFormData.append('uploadTrainFile',document.getElementById('trainFile').files[0]);
-        myFormData.append('uploadTestFile',document.getElementById('testFile').files[0]);
-        // myFormData.append('compId','31');
-         myFormData.append('compId',this.$router.query("compId"));
+      myFormData.append(
+        "uploadTrainFile",
+        document.getElementById("trainFile").files[0]
+      );
+      myFormData.append(
+        "uploadTestFile",
+        document.getElementById("testFile").files[0]
+      );
+      // myFormData.append('compId','31');
+      myFormData.append("compId", this.$route.query.compId);
       // let params = {
       //   compId: '31',
       //   //  compId: this.$router.query("compId"),
@@ -40,12 +46,15 @@ export default {
       //   uploadTestFile: document.getElementById('testFile').files[0],
       // };
       axios
-        .post("http://175.24.79.108:8080/competition/uploadCompData", myFormData)
+        .post(
+          "http://175.24.79.108:8080/competition/uploadCompData",
+          myFormData
+        )
         .then((data) => {
           if (data.data.status == "1") {
-            alert('上传数据成功')
+            alert("上传数据成功");
             console.log("上传数据成功");
-          
+            // this.$router.push({ path: "/competition" });
           }
           console.log(data);
         })
@@ -110,7 +119,7 @@ export default {
   /* border: 1px solid red; */
 }
 .pub-list input {
-  font-size: 16px;
+  font-size: 14px;
   color: #a8adb2;
   transform: scale(0.5, 0.5);
   transform-origin: left;
@@ -134,5 +143,8 @@ export default {
   height: 40px;
   margin-top: 10px;
   margin-left: 120px;
+}
+input::-webkit-input-placeholder {
+  color: #a8adb2;
 }
 </style>

@@ -1,4 +1,10 @@
 <template>
+<div>
+  <div class="header">
+    <span>首页</span>
+    <button class="login" @click="gotoLogin">登录</button>
+    <button @click="gotoRegister">注册</button>
+  </div>
   <div class="cmpt-container">
     <div
       class="compt-item"
@@ -20,13 +26,19 @@
         <div class="compt__summary">
           <div class="compt__oview">
             <div class="cmp-date">
-              比赛日期: {{ item.startDate }}-{{ item.endDate }}
+              比赛开始日期: {{ item.startDate }}
+            </div>
+            <div class="cmp-date">
+              比赛结束日期: {{ item.endDate }}
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+</div>
+  
 </template>
 
 <script>
@@ -54,9 +66,11 @@ export default {
   },
   mounted() {
     console.log("初始化列表");
-    this.util.setBodyBackGround();
+    // this.util.setBodyBackGround();
     this.getCompetitioninfo();
     window.addEventListener("scroll", this.scrollMethod);
+
+    console.log("全局路径"+process.env.URL_PATH)
   },
   methods: {
     scrollMethod() {
@@ -117,26 +131,60 @@ export default {
           console.log(error);
         });
     },
+      gotoLogin(){
+    this.$router.push({path:'/login'})
   },
-  beforeDestroy() {
-    // 离开页面的时候清除
-    console.log("清除列表");
-    this.util.clearBodyBackGround();
+  gotoRegister(){
+    this.$router.push({path:'/register'})
+  }
   },
-  scrollDs() {
-    console.log("滑动事件");
-  },
+  
+
 };
 </script>
 <style scoped>
 .compt__header {
   padding-left: 11px;
 }
+.header{
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.header span{
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform:scale(0.5);
+  margin-left: 100px;
+}
+.header button{
+  margin-top: -2px;
+  /* float: right; */
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+   font-size: 14px;
+  display: inline-block;
+  transform:scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.login{
+  margin-left: 450px;
+}
+.header button:last-child{
+  /* margin-right: 100px; */
+  margin-left: -30px;
+  background: #00c1de;
+}
 .cmpt-container {
   margin-left: 100px;
   width: 77.33333vw;
   height: 100%;
-  margin-top: 30px;
+  margin-top: 12px;
   margin-bottom: 20px;
 
 }
@@ -198,11 +246,13 @@ export default {
   margin-top: -5px;
 }
 .compt__oview {
-  display: flex;
+  /* display: flex; */
   width: 600px;
   margin-top: -5px;
 }
-
+.compt__oview div:last-child{
+  margin-top: -5px;
+}
 .cmp-date {
   font-size: 12px;
   font-family: PingFangSC-Regular, PingFang SC;
@@ -210,7 +260,7 @@ export default {
   color: #949fb8;
   transform: scale(0.6, 0.6);
   transform-origin: left;
-  display: inline-block;
+  /* display: inline-block; */
   margin-left: 1.53333vw;
 }
 </style>

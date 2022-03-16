@@ -48,13 +48,13 @@ export default {
   mounted() {
     // 进来的时候调用添加
     console.log("初始化登录");
-    this.util.setBodyBackGround();
+    // this.util.setBodyBackGround();
   },
-  beforeDestroy() {
-    // 离开页面的时候清除
-    console.log("清除页面登录");
-    this.util.clearBodyBackGround();
-  },
+  // beforeDestroy() {
+  //   // 离开页面的时候清除
+  //   console.log("清除页面登录");
+  //   this.util.clearBodyBackGround();
+  // },
 };
 </script>
 <style>
@@ -64,12 +64,13 @@ export default {
   margin: 0 auto;
   margin-top: 13%;
   text-align: center;
-  background: #00000060;
+  background: #fff;
   padding: 10px 50px;
   position: relative;
+  /* 9c9c9c */
 }
 #login-box h1 {
-  color: #fff;
+  color: #9c9c9c;
   font-size: 14px;
 }
 #login-box .form .item {
@@ -77,22 +78,22 @@ export default {
 }
 #login-box .form .item i {
   font-size: 18px;
-  color: #fff;
+  color: #9c9c9c;
 }
 input {
   border: none;
   outline: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: #9c9c9c;
   -webkit-tap-highlight-color: transparent;
 }
 #login-box .form .item input {
   width: 180px;
   font-size: 12px;
   border: 0;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #9c9c9c;
   padding: 5px 10px;
-  background: #ffffff00;
-  color: #fff;
+  background: #fff;
+  color: #9c9c9c;
 }
 #login-box button {
   margin-top: 20px;
@@ -102,7 +103,7 @@ input {
   font-weight: 700;
   color: #fff;
   /* background-image: linear-gradient(to right, #89f7fe 0%, #66a6ff 100%); */
-
+margin-bottom: 15px;
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
   border: 0;
   border-radius: 15px;
@@ -117,13 +118,12 @@ input {
   line-height: 30px;
   text-align: center;
   border: 1px solid #6a6a6a;
-  color: #6a6a6a;
   font-size: 12px;
   padding: 0 28px;
   display: inline-block;
   vertical-align: middle;
   border-radius: 2px;
-  color: #fff !important;
+  color: #9c9c9c !important;
   border: none;
   margin-top: -12%;
   /* background-image: linear-gradient(to right, #89f7fe 0%, #66a6ff 100%); */

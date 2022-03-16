@@ -55,7 +55,7 @@ export default {
   methods: {
     submitInfo() {
       let params = {
-        compId: this.$router.query("compId"),
+        compId: this.$route.query.compId,
         // compId: "31",
         commonProblem: document.getElementById("commonProblem").value,
       };
@@ -67,7 +67,7 @@ export default {
             console.log("比赛常见问题更新成功");
             this.$router.push({
               path: "/upload",
-              query: { compId: this.$router.query("compId") },
+              query: { compId: this.$route.query.compId },
             });
           }
           console.log(data);
@@ -144,6 +144,9 @@ export default {
   margin-top: -8.6vw;
   border: 1px solid #eceeef;
   padding: 15px;
+}
+input::-webkit-input-placeholder {
+  color: #a8adb2;
 }
 
 .confirm {

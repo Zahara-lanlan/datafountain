@@ -9,7 +9,20 @@
       </div>
       <div class="pub-list">
         <span>比赛类型</span>
-        <input type="text" id="compType" placeholder="请输入比赛类型" />
+        <div class="option" style="display: inline-block">
+          <select class="pub-type" @change="selectClass($event)">
+            <option value="NONE">未选择</option>
+            <option
+              v-for="(options, id) in selectClassData"
+              :key="id"
+              :value="options.title"
+            >
+              {{ options.title }}
+            </option>
+          </select>
+        </div>
+
+        <!-- <input type="text" id="compType" placeholder="请输入比赛类型" /> -->
       </div>
       <div class="pub-list">
         <span>比赛开始时间</span>
@@ -41,13 +54,25 @@ export default {
   data() {
     return {
       bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
+      selectClassData: [
+        { title: "分类" },
+        { title: "图像修复" },
+        { title: "图像分割" },
+      ],
+
+      compType: "",
     };
   },
   methods: {
+    //类别选中
+    selectClass(event) {
+      console.log("选中的类别", event.target.value);
+      this.compType = event.target.value;
+    },
     sumbitInfo() {
       let params = {
         name: document.getElementById("name").value,
-        compType: document.getElementById("compType").value,
+        compType: this.compType,
         startDate: document.getElementById("startDate").value,
         endDate: document.getElementById("endDate").value,
       };
@@ -94,6 +119,10 @@ export default {
   margin-bottom: 2.66667vw;
   height: 100%;
 }
+
+input::-webkit-input-placeholder {
+  color: #a8adb2;
+}
 .pub-title {
   font-size: 16px;
   color: #1a1a1a;
@@ -102,6 +131,29 @@ export default {
   border-bottom: 1px solid #eceeef;
   margin-top: 5px;
 }
+.pub-type {
+  margin-left: -28px;
+  border: none;
+  font-size: 16px;
+  color: #a8adb2;
+  /* zoom: 0.6; */
+  transform: scale(0.5, 0.5);
+  outline: none;
+  width: 200px;
+}
+
+.pub-type select:focus {
+  width: 100%;
+  border: none;
+  height: 3.6rem;
+  background: red;
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  vertical-align: top;
+  padding-left: 1rem;
+}
+
 .pub-item {
   border-radius: 8px;
   margin-left: 40px;
@@ -126,20 +178,19 @@ export default {
 }
 .pub-list input {
   font-size: 2.13333vw;
-    color: #a8adb2;
-    /* transform: scale(0.5, 0.5); */
-    transform-origin: left;
-    border: none;
-    margin-left: 6vw;
-    /* width: 29.33333vw; */
-    outline: none;
-    zoom: .5;
-    width: 400px;
-    /* border: 1px solid red; */
-    position: absolute;
-    top: px;
-    margin-top: 15px;
-
+  color: #a8adb2;
+  /* transform: scale(0.5, 0.5); */
+  transform-origin: left;
+  border: none;
+  margin-left: 6vw;
+  /* width: 29.33333vw; */
+  outline: none;
+  zoom: 0.5;
+  width: 400px;
+  /* border: 1px solid red; */
+  position: absolute;
+  top: px;
+  margin-top: 15px;
 }
 .confirm {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */

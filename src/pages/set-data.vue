@@ -56,7 +56,7 @@ export default {
   methods: {
     submitInfo() {
       let params = {
-        compId: this.$router.query("compId"),
+        compId: this.$route.query.compId,
         // compId: "31",
         dataIntro: document.getElementById("dataIntro").innerHTML,
         submissionRule: document.getElementById("submissionRule").innerHTML,
@@ -71,7 +71,7 @@ export default {
             console.log("设置数据成功");
             this.$router.push({
               path: "/setquestion",
-              query: { compId: this.$router.query("compId") },
+              query: { compId: this.$route.query.compId },
             });
           }
           console.log(data);
@@ -108,6 +108,10 @@ export default {
 .pub-title {
   font-size: 16px;
   color: #1a1a1a;
+}
+
+input::-webkit-input-placeholder {
+  color: #a8adb2;
 }
 .pub-list {
   border-bottom: 1px solid #eceeef;

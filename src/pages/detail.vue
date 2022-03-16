@@ -134,7 +134,7 @@
         </div>
         <!-- 排行榜  -->
         <div v-show="rankVisible">
-          <table id="tbl" width="400" cellpadding="0" cellspacing="0">
+          <table id="tbl" width="440" cellpadding="0" cellspacing="0">
             <thead>
               <tr>
                 <th>
@@ -241,7 +241,7 @@ export default {
   },
   mounted() {
     console.log("初始化详情");
-    this.util.setBodyBackGround();
+    // this.util.setBodyBackGround();
     console.log(this.$route.query);
     this.getDetailInfo();
     this.getCompDataEval();
@@ -299,7 +299,7 @@ export default {
   beforeDestroy() {
     // 离开页面的时候清除
     console.log("清除详情");
-    this.util.clearBodyBackGround();
+    // this.util.clearBodyBackGround();
   },
   updated() {
     console.log("pageId", this.pageId);
@@ -699,7 +699,7 @@ export default {
 }
 #tbl {
   margin: 20px;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 #tbl tr {
   text-align: center;

@@ -56,7 +56,7 @@ export default {
   methods: {
     submitInfo() {
       let params = {
-        compId: this.$router.query("compId"),
+        compId: this.$route.query.compId,
         // compId: "31",
         compBackGround: document.getElementById("compBackGround").value,
         compIntro: document.getElementById("compIntro").value,
@@ -70,7 +70,7 @@ export default {
             console.log("创建规则成功");
             this.$router.push({
               path: "/setdata",
-              query: { compId: this.$router.query("compId") },
+              query: { compId: this.$route.query.compId },
             });
           }
           console.log(data);
@@ -84,6 +84,7 @@ export default {
   mounted() {
     // 进来的时候调用添加
     console.log("初始化登录");
+    console.log(this.$route.query.compId);
     this.util.setBodyBackGround();
   },
   beforeDestroy() {
@@ -146,7 +147,9 @@ export default {
   margin-bottom: -10px;
   padding: 10px;
 }
-
+input::-webkit-input-placeholder {
+  color: #a8adb2;
+}
 .confirm {
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
   border-radius: 20px;
