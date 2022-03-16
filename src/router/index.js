@@ -88,15 +88,5 @@ export default new Router({
         title: "上传数据集",
       },
     },
-    {
-      path: "/Test",
-      name: "",
-      component: () => import("@/pages/test.vue"),
-      meta: {
-        title: "测试",
-      },
-    },
-    
-
   ],
 });

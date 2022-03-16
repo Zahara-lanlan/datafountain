@@ -2,8 +2,8 @@
   <div class="pub-content">
     <p class="pub-title">设置常见问题</p>
 
-    <div class="pub-item">
-      <div class="pub-list">
+    <div class="pub-item4">
+      <div class="pub-list4">
         <span>常见问题</span>
         <!-- <input
           type="textarea"
@@ -18,11 +18,11 @@
         >
         </textarea>
       </div>
-      <!-- <div class="pub-list">
+      <!-- <div class="pub-list4">
         <span>比赛介绍</span>
         <input type="text" placeholder="请输入比赛介绍" />
       </div>
-      <div class="pub-list">
+      <div class="pub-list4">
         <span>比赛日程</span>
         <input
           type="text"
@@ -30,7 +30,7 @@
           style="margin-left: 14px"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list4">
         <span>比赛规则</span>
         <input
           type="text"
@@ -38,7 +38,7 @@
           style="margin-left: 14px"
         />
       </div> -->
-      <button class="confirm" @click="submitInfo">下一步</button>
+      <button class="confirm4" @click="submitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -59,8 +59,9 @@ export default {
         // compId: "31",
         commonProblem: document.getElementById("commonProblem").value,
       };
+      // this.$router.push({ path: "/upload" });
       axios
-        .post("http://175.24.79.108:8080/competition/setCompProblem", params)
+        .post(this.util.BASE_URL + "/competition/setCompProblem", params)
         .then((data) => {
           if (data.data.status == "1") {
             // alert("比赛常见问题更新成功");
@@ -105,11 +106,11 @@ export default {
   font-size: 16px;
   color: #1a1a1a;
 }
-.pub-list {
+.pub-list4 {
   /* border-bottom: 1px solid #eceeef; */
   margin-top: 5px;
 }
-.pub-item {
+.pub-item4 {
   border-radius: 8px;
   margin-left: 40px;
   border: 0.13333vw solid #f5f5f5;
@@ -120,7 +121,7 @@ export default {
   padding-right: 40px;
   /* box-shadow: -2px 0 3px -1px #ffffff; */
 }
-.pub-list span {
+.pub-list4 span {
   font-family: FZLTHJW--GB1-0;
   font-size: 16px;
   transform: scale(0.5, 0.5);
@@ -132,8 +133,8 @@ export default {
   width: 100px;
   /* border: 1px solid red; */
 }
-.pub-list textarea {
-  font-size: 2.13333vw;
+.pub-list4 textarea {
+  font-size: 14px;
   color: #a8adb2;
   transform: scale(0.5, 0.5);
   transform-origin: left;
@@ -149,7 +150,7 @@ input::-webkit-input-placeholder {
   color: #a8adb2;
 }
 
-.confirm {
+.confirm4 {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
   border-radius: 20px;

@@ -2,12 +2,12 @@
   <div class="pub-content">
     <p class="pub-title">创建比赛</p>
 
-    <div class="pub-item">
-      <div class="pub-list">
+    <div class="pub-item1">
+      <div class="pub-list1">
         <span>比赛名称</span>
         <input id="name" type="text" placeholder="请输入比赛名称" />
       </div>
-      <div class="pub-list">
+      <div class="pub-list1">
         <span>比赛类型</span>
         <div class="option" style="display: inline-block">
           <select class="pub-type" @change="selectClass($event)">
@@ -24,7 +24,7 @@
 
         <!-- <input type="text" id="compType" placeholder="请输入比赛类型" /> -->
       </div>
-      <div class="pub-list">
+      <div class="pub-list1">
         <span>比赛开始时间</span>
         <input
           type="text"
@@ -33,7 +33,7 @@
           style="margin-left: -20px"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list1">
         <span>比赛结束时间</span>
         <input
           type="text"
@@ -42,7 +42,7 @@
           style="margin-left: -20px"
         />
       </div>
-      <button class="confirm" @click="sumbitInfo">下一步</button>
+      <button class="confirm1" @click="sumbitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -76,8 +76,9 @@ export default {
         startDate: document.getElementById("startDate").value,
         endDate: document.getElementById("endDate").value,
       };
+      // this.$router.push({ path: "/setrule" });
       axios
-        .post("http://175.24.79.108:8080/competition/createComp", params)
+        .post(this.util.BASE_URL + "/competition/createComp", params)
         .then((data) => {
           if (data.data.status == "1") {
             console.log("创建比赛成功");
@@ -127,7 +128,7 @@ input::-webkit-input-placeholder {
   font-size: 16px;
   color: #1a1a1a;
 }
-.pub-list {
+.pub-list1 {
   border-bottom: 1px solid #eceeef;
   margin-top: 5px;
 }
@@ -154,7 +155,7 @@ input::-webkit-input-placeholder {
   padding-left: 1rem;
 }
 
-.pub-item {
+.pub-item1 {
   border-radius: 8px;
   margin-left: 40px;
   border: 0.13333vw solid #f5f5f5;
@@ -165,7 +166,7 @@ input::-webkit-input-placeholder {
   padding-right: 40px;
   /* box-shadow: -2px 0 3px -1px #ffffff; */
 }
-.pub-list span {
+.pub-list1 span {
   font-family: FZLTHJW--GB1-0;
   font-size: 16px;
   transform: scale(0.5, 0.5);
@@ -176,7 +177,7 @@ input::-webkit-input-placeholder {
   margin-left: 25px;
   /* border: 1px solid red; */
 }
-.pub-list input {
+.pub-list1 input {
   font-size: 2.13333vw;
   color: #a8adb2;
   /* transform: scale(0.5, 0.5); */
@@ -192,7 +193,7 @@ input::-webkit-input-placeholder {
   top: px;
   margin-top: 15px;
 }
-.confirm {
+.confirm1 {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
   border-radius: 20px;

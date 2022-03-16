@@ -2,8 +2,8 @@
   <div class="pub-content">
     <p class="pub-title">设置比赛规则</p>
 
-    <div class="pub-item">
-      <div class="pub-list">
+    <div class="pub-item2">
+      <div class="pub-list2">
         <span>比赛背景</span>
         <textarea
           rows="5"
@@ -12,7 +12,7 @@
           placeholder="请输入比赛背景"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list2">
         <span>比赛介绍</span>
         <textarea
           rows="5"
@@ -21,7 +21,7 @@
           placeholder="请输入比赛介绍"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list2">
         <span>比赛日程</span>
         <textarea
           rows="5"
@@ -30,7 +30,7 @@
           placeholder="请输入比赛日程"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list2">
         <span>比赛规则</span>
         <textarea
           rows="5"
@@ -39,7 +39,7 @@
           placeholder="请输入比赛规则"
         />
       </div>
-      <button class="confirm" @click="submitInfo">下一步</button>
+      <button class="confirm2" @click="submitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -63,8 +63,9 @@ export default {
         compSchedule: document.getElementById("compSchedule").value,
         compRule: document.getElementById("compRule").value,
       };
+      // this.$router.push({ path: "/setdata" });
       axios
-        .post("http://175.24.79.108:8080/competition/setCompRule", params)
+        .post(this.util.BASE_URL + "/competition/setCompRule", params)
         .then((data) => {
           if (data.data.status == "1") {
             console.log("创建规则成功");
@@ -110,11 +111,11 @@ export default {
   font-size: 16px;
   color: #1a1a1a;
 }
-.pub-list {
+.pub-list2 {
   border-bottom: 1px solid #eceeef;
   margin-top: 1.66667vw;
 }
-.pub-item {
+.pub-item2 {
   border-radius: 8px;
   margin-left: 40px;
   border: 0.13333vw solid #f5f5f5;
@@ -125,7 +126,7 @@ export default {
   padding-right: 40px;
   /* box-shadow: -2px 0 3px -1px #ffffff; */
 }
-.pub-list span {
+.pub-list2 span {
   font-family: FZLTHJW--GB1-0;
   font-size: 16px;
   transform: scale(0.5, 0.5);
@@ -136,8 +137,8 @@ export default {
   margin-left: 25px;
   /* border: 1px solid red; */
 }
-.pub-list textarea {
-  font-size: 16px;
+.pub-list2 textarea {
+  font-size: 14px;
   color: #a8adb2;
   transform: scale(0.5, 0.5);
   transform-origin: center;
@@ -146,11 +147,12 @@ export default {
   margin-left: -37px;
   margin-bottom: -10px;
   padding: 10px;
+  outline: none;
 }
 input::-webkit-input-placeholder {
   color: #a8adb2;
 }
-.confirm {
+.confirm2 {
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
   border-radius: 20px;
   border-radius: 20px;

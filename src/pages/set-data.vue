@@ -2,8 +2,8 @@
   <div class="pub-content">
     <p class="pub-title">设置数据与评测</p>
 
-    <div class="pub-item">
-      <div class="pub-list">
+    <div class="pub-item3">
+      <div class="pub-list3">
         <span>数据说明</span>
         <textarea
           id="dataIntro"
@@ -12,7 +12,7 @@
           placeholder="请输入数据说明"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list3">
         <span>提交要求</span>
         <textarea
           id="submissionRule"
@@ -21,7 +21,7 @@
           placeholder="请输入提交要求"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list3">
         <span>提交示例</span>
         <textarea
           id="submissionExample"
@@ -30,7 +30,7 @@
           placeholder="请输入提交示例"
         />
       </div>
-      <div class="pub-list">
+      <div class="pub-list3">
         <span>评测标准</span>
         <textarea
           id="evalCriteria"
@@ -39,7 +39,7 @@
           placeholder="请输入评测标准"
         />
       </div>
-      <button class="confirm" @click="submitInfo">下一步</button>
+      <button class="confirm3" @click="submitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -64,6 +64,7 @@ export default {
           document.getElementById("submissionExample").innerHTML,
         evalCriteria: document.getElementById("evalCriteria").innerHTML,
       };
+      // this.$router.push({ path: "/setquestion" });
       axios
         .post("http://175.24.79.108:8080/competition/setCompDataEval", params)
         .then((data) => {
@@ -113,11 +114,11 @@ export default {
 input::-webkit-input-placeholder {
   color: #a8adb2;
 }
-.pub-list {
+.pub-list3 {
   border-bottom: 1px solid #eceeef;
   margin-top: 1.66667vw;
 }
-.pub-item {
+.pub-item3 {
   border-radius: 8px;
   margin-left: 40px;
   border: 0.13333vw solid #f5f5f5;
@@ -128,7 +129,7 @@ input::-webkit-input-placeholder {
   padding-right: 40px;
   /* box-shadow: -2px 0 3px -1px #ffffff; */
 }
-.pub-list span {
+.pub-list3 span {
   font-family: FZLTHJW--GB1-0;
   font-size: 16px;
   transform: scale(0.5, 0.5);
@@ -139,8 +140,8 @@ input::-webkit-input-placeholder {
   margin-left: 25px;
   /* border: 1px solid red; */
 }
-.pub-list textarea {
-  font-size: 16px;
+.pub-list3 textarea {
+  font-size: 14px;
   color: #a8adb2;
   transform: scale(0.5, 0.5);
   transform-origin: center;
@@ -151,7 +152,7 @@ input::-webkit-input-placeholder {
   padding: 10px;
 }
 
-.confirm {
+.confirm3 {
   background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
   border-radius: 20px;
   border-radius: 20px;

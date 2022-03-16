@@ -1,44 +1,38 @@
 <template>
-<div>
-  <div class="header">
-    <span>首页</span>
-    <button class="login" @click="gotoLogin">登录</button>
-    <button @click="gotoRegister">注册</button>
-  </div>
-  <div class="cmpt-container">
-    <div
-      class="compt-item"
-      v-for="item of competList"
-      :key="item.key"
-      @click="handelDetails(item.compId, item.name, item.compType)"
-    >
-      <div class="compt-info">
-        <div class="compt__header">
-          <a
-            class="el-tooltip compt__title item"
-            aria-describedby="el-tooltip-2560"
-            tabindex="0"
-          >
-            {{ item.name }}
-          </a>
-          <span class="compt__cmpt-type">{{ item.compType }}</span>
-        </div>
-        <div class="compt__summary">
-          <div class="compt__oview">
-            <div class="cmp-date">
-              比赛开始日期: {{ item.startDate }}
-            </div>
-            <div class="cmp-date">
-              比赛结束日期: {{ item.endDate }}
+  <div>
+    <div class="header">
+      <span>首页</span>
+      <button class="login" @click="gotoLogin">登录</button>
+      <button @click="gotoRegister">注册</button>
+    </div>
+    <div class="cmpt-container1" id="cmptContainer">
+      <div
+        class="compt-item"
+        v-for="item of competList"
+        :key="item.key"
+        @click="handelDetails(item.compId, item.name, item.compType)"
+      >
+        <div class="compt-info">
+          <div class="compt__header">
+            <a
+              class="el-tooltip compt__title item"
+              aria-describedby="el-tooltip-2560"
+              tabindex="0"
+            >
+              {{ item.name }}
+            </a>
+            <span class="compt__cmpt-type">{{ item.compType }}</span>
+          </div>
+          <div class="compt__summary">
+            <div class="compt__oview">
+              <div class="cmp-date">比赛开始日期: {{ item.startDate }}</div>
+              <div class="cmp-date">比赛结束日期: {{ item.endDate }}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-</div>
-  
 </template>
 
 <script>
@@ -70,19 +64,27 @@ export default {
     this.getCompetitioninfo();
     window.addEventListener("scroll", this.scrollMethod);
 
-    console.log("全局路径"+process.env.URL_PATH)
+    console.log("全局路径" + process.env.URL_PATH);
+  },
+  destroyed() {
+    console.log("离开当前页面");
+    window.removeEventListener("scroll", this.scrollMethod);
   },
   methods: {
     scrollMethod() {
       console.log("滚动监听");
-      console.log(document.documentElement.scrollTop);
+      console.log(
+        document.documentElement.scrollTop,
+        window.innerHeight,
+        document.body.scrollHeight
+      );
       if (
         document.documentElement.scrollTop + window.innerHeight + 1 >=
-        document.body.scrollHeight
+        document.documentElement.scrollHeight
       ) {
         console.log("拉到底了");
         axios
-          .post("http://175.24.79.108:8080/competition/getCompList", {
+          .post(this.util.BASE_URL + "/competition/getCompList", {
             page: "2",
           })
           .then((data) => {
@@ -116,7 +118,7 @@ export default {
 
       // })
       axios
-        .post("http://175.24.79.108:8080/competition/getCompList", {
+        .post(this.util.BASE_URL + "/competition/getCompList", {
           page: "1",
         })
         .then((data) => {
@@ -131,62 +133,59 @@ export default {
           console.log(error);
         });
     },
-      gotoLogin(){
-    this.$router.push({path:'/login'})
+    gotoLogin() {
+      this.$router.push({ path: "/login" });
+    },
+    gotoRegister() {
+      this.$router.push({ path: "/register" });
+    },
   },
-  gotoRegister(){
-    this.$router.push({path:'/register'})
-  }
-  },
-  
-
 };
 </script>
 <style scoped>
 .compt__header {
   padding-left: 11px;
 }
-.header{
+.header {
   width: 100%;
   height: 25px;
   background: #000;
 }
-.header span{
+.header span {
   color: #cdcdcd;
   font-size: 14px;
   display: inline-block;
-  transform:scale(0.5);
+  transform: scale(0.5);
   margin-left: 100px;
 }
-.header button{
+.header button {
   margin-top: -2px;
   /* float: right; */
   color: #fff;
   border: 0.5px solid #cdcdcd;
-   font-size: 14px;
+  font-size: 14px;
   display: inline-block;
-  transform:scale(0.5);
+  transform: scale(0.5);
   background: #000;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 4px;
   padding-bottom: 4px;
 }
-.login{
+.login {
   margin-left: 450px;
 }
-.header button:last-child{
+.header button:last-child {
   /* margin-right: 100px; */
   margin-left: -30px;
   background: #00c1de;
 }
-.cmpt-container {
+.cmpt-container1 {
   margin-left: 100px;
   width: 77.33333vw;
   height: 100%;
   margin-top: 12px;
   margin-bottom: 20px;
-
 }
 .compt-item {
   background: #fff;
@@ -250,7 +249,7 @@ export default {
   width: 600px;
   margin-top: -5px;
 }
-.compt__oview div:last-child{
+.compt__oview div:last-child {
   margin-top: -5px;
 }
 .cmp-date {

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="cmpt-container">
+    <div class="cmpt-container2">
       <div class="competition-wrapper">
         <!-- <div class="competition__avatar">
           <img src="./../assets/img/game.jpg" />
@@ -314,20 +314,20 @@ export default {
       this.setDomHeight("dataIntro", "data");
       this.setDomHeight("submissionRule", "submission");
       this.setDomHeight("submissionExample", "example");
-      this.setDomHeight("evalCriteria","criteria")
+      this.setDomHeight("evalCriteria", "criteria");
     } else {
       this.setDomHeight("background", "back");
       this.setDomHeight("commIntro", "intro");
       this.setDomHeight("compRule", "rule");
       this.setDomHeight("compSchedule", "schedule");
-      
     }
   },
   methods: {
     getDetailInfo() {
       axios
         .post(
-          "http://175.24.79.108:8080/competition/getCompRule?compId=" +
+          this.util.BASE_URL +
+            "/competition/getCompRule?compId=" +
             this.$route.query.compId
         )
         .then((data) => {
@@ -346,7 +346,8 @@ export default {
     getCompDataEval: function () {
       axios
         .post(
-          "http://175.24.79.108:8080/competition/getCompDataEval?compId=" +
+          this.util.BASE_URL +
+            "/competition/getCompDataEval?compId=" +
             this.$route.query.compId
         )
         .then((data) => {
@@ -400,10 +401,7 @@ export default {
         compId: this.$route.query.compId,
       };
       axios
-        .post(
-          "http://175.24.79.108:8080/competition/getCompDataName",
-          getParams
-        )
+        .post(this.util.BASE_URL + "/competition/getCompDataName", getParams)
         .then((data) => {
           console.log("数据集的详情", data);
           if (data.data.status === "1") {
@@ -494,7 +492,7 @@ export default {
         type: type,
       };
       axios
-        .post("http://175.24.79.108:8080/competition/downCompData", getParams)
+        .post(this.util.BASE_URL + "/competition/downCompData", getParams)
         .then((data) => {
           console.log("下载详情", data);
           // if (data.data.status === "1") {
@@ -519,7 +517,7 @@ export default {
   width: 550px;
   height: 100%;
   margin-left: 100px;
-  margin-top: 60px;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   /* border: 1px solid red; */
@@ -528,7 +526,7 @@ export default {
   list-style: none;
   display: inline-block;
 }
-.cmpt-container {
+.cmpt-container2 {
   /* margin-left: 100px; */
   width: 77.33333vw;
   height: 100%;
