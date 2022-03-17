@@ -39,23 +39,12 @@
 import axios from "axios";
 export default {
   name: "Competition",
+  pageId: 0,
   data() {
     return {
       bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
-      competList: [
-        // {
-        //   img: "https://wid.s3.cn-north-1.amazonaws.com.cn/uploads/images/2021-12-23/OPPO-6G%E8%B5%9B%E9%A2%98%E5%9B%BE-192402.jpg",
-        // },
-        // {
-        //   img: require("./../assets/img/traffic.png"),
-        // },
-        // {
-        //   img: require("./../assets/img/game.jpg"),
-        // },
-        // {
-        //   img: require("./../assets/img/game.jpg"),
-        // },
-      ],
+      competList: [],
+      page: 1,
     };
   },
   mounted() {
@@ -82,19 +71,23 @@ export default {
         document.documentElement.scrollTop + window.innerHeight + 1 >=
         document.documentElement.scrollHeight
       ) {
-        console.log("拉到底了");
+        this.page++;
+        console.log("拉到底了", this.page);
         axios
           .post(this.util.BASE_URL + "/competition/getCompList", {
-            page: "2",
+            page: this.page,
           })
           .then((data) => {
             console.log("获取的数据1111");
+            console.log(data);
             if (data.data.status === "1") {
               this.competList = this.competList.concat(data.data.compList);
               console.log(this.competList);
-              window.removeEventListener("scroll", this.scrollMethod);
+              if (data.data.lastPage === "1") {
+                console.log("最后一页了");
+                window.removeEventListener("scroll", this.scrollMethod);
+              }
             }
-            console.log(data);
           })
           .catch((error) => {
             console.log(error);
@@ -119,7 +112,7 @@ export default {
       // })
       axios
         .post(this.util.BASE_URL + "/competition/getCompList", {
-          page: "1",
+          page: this.page,
         })
         .then((data) => {
           console.log("获取的数据");

@@ -34,7 +34,7 @@
             <span class="el-menu-item">排行榜</span>
           </li>
           <li tabindex="4" @click="changeDetailInfo">
-            <span class="el-menu-item">参赛队伍</span>
+            <span class="el-menu-item">参赛信息</span>
           </li>
         </ul>
       </div>
@@ -134,51 +134,56 @@
         </div>
         <!-- 排行榜  -->
         <div v-show="rankVisible">
+          <div id="ranks">
+            <p id="rank">
+              <i class="bg-img"></i><span class="page-title">排行榜</span>
+            </p>
+          </div>
           <table id="tbl" class="tbl" cellpadding="0" cellspacing="0">
             <thead>
               <tr>
                 <th class="th1">
-                  <div class="table_header">
-                    <span>排名</span>
+                  <div class="table_container">
+                    <span class="item-line1">排名</span>
                   </div>
                 </th>
                 <th class="th2">
-                  <div class="table_header">
-                    <span>提交队伍</span>
+                  <div class="table_container">
+                    <span class="item-line2">提交队伍</span>
                   </div>
                 </th>
                 <th class="th3">
-                  <div class="table_header">
-                    <span>提交时间</span>
+                  <div class="table_container">
+                    <span class="item-line3">提交时间</span>
                   </div>
                 </th>
                 <th class="th4">
-                  <div class="table_header">
-                    <span>最高得分</span>
+                  <div class="table_container">
+                    <span class="item-line4">最高得分</span>
                   </div>
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item of rankData" :key="item.id">
+              <tr v-for="item of compRank" :key="item.id">
                 <td>
                   <div class="table_container">
-                    <span>{{ item.rank }}</span>
+                    <span class="item-line1">{{ item.upResultId }}</span>
                   </div>
                 </td>
                 <td>
                   <div class="table_container">
-                    <span>{{ item.submitTeam }}</span>
+                    <span class="item-line2">{{ item.groupName }}</span>
                   </div>
                 </td>
                 <td>
                   <div class="table_container">
-                    <span>{{ item.submitTime }}</span>
+                    <span class="item-line3">{{ item.updateTime }}</span>
                   </div>
                 </td>
                 <td>
                   <div class="table_container">
-                    <span>{{ item.highScore }}</span>
+                    <span class="item-line3">{{ item.score }}</span>
                   </div>
                 </td>
               </tr>
@@ -187,6 +192,26 @@
         </div>
         <!-- 参赛队伍  -->
         <div v-show="teamVisible" class="team">
+          <div id="uploadsets">
+            <p id="set">
+              <i class="bg-img"></i><span class="page-title">上传数据集</span>
+              <span class="data-train" style="display: block">
+                <input
+                  id="dataTrain"
+                  type="file"
+                  placeholder="请输入比赛名称"
+                />
+              </span>
+              <button class="confirm-upload" @click="submitCompResult">
+                确定
+              </button>
+            </p>
+          </div>
+          <div id="teams">
+            <p id="team">
+              <i class="bg-img"></i><span class="page-title">参赛队伍</span>
+            </p>
+          </div>
           <div class="team-container" v-for="item of teamData" :key="item.id">
             <img :src="item.img" alt="" />
             <div class="team-item">
@@ -247,30 +272,31 @@ export default {
     this.getCompDataEval();
     this.getCompProblem();
     this.getCompDataName();
-    this.rankData = [
+    this.getCompRanking();
+    this.compRank = [
       {
-        rank: 1,
-        submitTeam: "阳光炼丹炉",
-        submitTime: "2022-03-03 11:27",
-        highScore: 0.7437505,
+        upResultId: 1,
+        groupName: "阳光炼丹炉",
+        updateTime: "2022-03-03 11:27",
+        score: 0.7437505,
       },
       {
-        rank: 2,
-        submitTeam: "尼古拉斯-土土",
-        submitTime: "2022-03-09 23:27",
-        highScore: 0.9437505,
+        upResultId: 2,
+        groupName: "尼古拉斯-土土",
+        updateTime: "2022-03-09 23:27",
+        score: 0.9437505,
       },
       {
-        rank: 3,
-        submitTeam: "代码搬运工",
-        submitTime: "2022-03-14 23:27",
-        highScore: 0.8437505,
+        upResultId: 3,
+        groupName: "代码搬运工",
+        updateTime: "2022-03-14 23:27",
+        score: 0.8437505,
       },
       {
-        rank: 4,
-        submitTeam: "我吃西红柿",
-        submitTime: "2022-03-08 16:27",
-        highScore: 0.5437505,
+        upResultId: 4,
+        groupName: "我吃西红柿",
+        updateTime: "2022-03-08 16:27",
+        score: 0.5437505,
       },
     ];
     this.teamData = [
@@ -315,6 +341,27 @@ export default {
       this.setDomHeight("submissionRule", "submission");
       this.setDomHeight("submissionExample", "example");
       this.setDomHeight("evalCriteria", "criteria");
+    } else if (this.pageId === "3") {
+      console.log("pageId");
+
+      document.getElementById("ranks").style.height =
+        document.getElementById("rank").getBoundingClientRect().height + "px";
+      let tableList = Array.prototype.slice.call(
+        document.querySelectorAll(".table_container")
+      );
+      tableList.forEach((item) => {
+        item.style.width =
+          item.children[0].getBoundingClientRect().width + "px";
+
+        item.style.height =
+          item.children[0].getBoundingClientRect().height + "px";
+      });
+    } else if (this.pageId === "4") {
+      this.setDomHeight("uploadsets", "set");
+      // document.getElementById("uploadsets").style.height =
+      //   document.getElementById("set").getBoundingClientRect().height + "px";
+      document.getElementById("teams").style.height =
+        document.getElementById("team").getBoundingClientRect().height + "px";
     } else {
       this.setDomHeight("background", "back");
       this.setDomHeight("commIntro", "intro");
@@ -424,6 +471,29 @@ export default {
           console.log(error);
         });
     },
+
+    getCompRanking() {
+      let getParams = {
+        // compId: this.$route.query.compId,
+
+        compId: "28",
+      };
+
+      axios
+        .post(this.util.BASE_URL + "/competition/getCompRanking", getParams)
+        .then((data) => {
+          console.log("获取排行榜", data);
+          if (data.data.status === "1") {
+            console.log(data.data.compRank);
+            this.compRank = data.data.compRank;
+            console.log("排行榜", this.compRank);
+          }
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     changeDetailInfo() {
       console.log("切换tab");
       console.log(event.currentTarget);
@@ -504,6 +574,29 @@ export default {
           a.href = url;
           a.click();
           // }
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    submitCompResult() {
+      console.log("上传数据");
+      let myFormData = new FormData();
+
+      myFormData.append(
+        "uploadResultFile",
+        document.getElementById("dataTrain").files[0]
+      );
+      myFormData.append("compId", this.$route.query.compId);
+      axios
+        .post(this.util.BASE_URL + "/competition/submitCompResult", myFormData)
+        .then((data) => {
+          if (data.data.status == "1") {
+            alert("上传数据成功");
+            console.log("上传数据成功");
+            // this.$router.push({ path: "/competition" });
+          }
           console.log(data);
         })
         .catch((error) => {
@@ -664,7 +757,6 @@ export default {
   margin-left: 20px;
 }
 .page-content p,
-.table_header span,
 .table_container span,
 .team-slogan span {
   color: inherit;
@@ -674,13 +766,15 @@ export default {
   display: block;
   transform: scale(0.5, 0.5);
 }
+.table_container span {
+  transform-origin: left top;
+}
 .page-content p,
 .team-slogan span {
   transform-origin: left top;
   width: 129.2vw;
   position: relative;
 }
-.table_header span,
 .table_container span,
 .team-slogan span {
   /* margin-top: 3px; */
@@ -688,16 +782,24 @@ export default {
   height: 20px;
   color: #909399;
 }
+
+.table_container {
+  /* border: 1px solid red; */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: auto;
+}
 .table_container span {
   color: #666;
+  /* border: 1px solid red; */
 }
-.table_header div,
 .table_container div,
 .team-slogan {
   height: 20px;
 }
 #tbl {
-  margin: 20px;
+  /* margin: 20px; */
+  margin-bottom: 20px;
   margin-left: 10px;
 }
 #tbl tr {
@@ -738,7 +840,7 @@ export default {
   top: 2px;
 }
 .team {
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .team-name span {
   color: #333;
@@ -817,5 +919,34 @@ export default {
 }
 .th4 {
   width: 110px;
+}
+.item-line1 {
+  width: 120px;
+}
+.item-line2 {
+  width: 280px;
+}
+.item-line3 {
+  width: 260px;
+}
+.item-line4 {
+  width: 220px;
+}
+.data-train {
+  display: block;
+  margin-left: 30px;
+}
+.confirm-upload {
+  border: none;
+  outline: none;
+  background-color: rgb(135, 208, 104);
+  color: #fff;
+  /* padding: 10px; */
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 250px;
+  margin-top: 40px;
+  font-size: 18px;
 }
 </style>
