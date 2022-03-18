@@ -88,5 +88,13 @@ export default new Router({
         title: "上传数据集",
       },
     },
+    {
+      path: "/evaluation",
+      name: "Evaluation",
+      component: () => import("@/pages/evaluation.vue"),
+      meta: {
+        title: "评价",
+      },
+    },
   ],
 });

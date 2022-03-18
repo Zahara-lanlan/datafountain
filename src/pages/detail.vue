@@ -474,9 +474,9 @@ export default {
 
     getCompRanking() {
       let getParams = {
-        // compId: this.$route.query.compId,
+        compId: this.$route.query.compId,
 
-        compId: "28",
+        // compId: "28",
       };
 
       axios
@@ -935,6 +935,7 @@ export default {
 .data-train {
   display: block;
   margin-left: 30px;
+  margin-top: 5px;
 }
 .confirm-upload {
   border: none;

@@ -24,23 +24,17 @@
 
         <!-- <input type="text" id="compType" placeholder="请输入比赛类型" /> -->
       </div>
-      <div class="pub-list1">
+      <div class="pub-list11">
         <span>比赛开始时间</span>
-        <input
-          type="text"
-          id="startDate"
-          placeholder="请输入比赛开始时间"
-          style="margin-left: -20px"
-        />
+        <div class="timePicker">
+          <a-date-picker @change="changeStartTime" default-value="2021-01-01" />
+        </div>
       </div>
-      <div class="pub-list1">
+      <div class="pub-list11">
         <span>比赛结束时间</span>
-        <input
-          type="text"
-          id="endDate"
-          placeholder="请输入比赛结束时间"
-          style="margin-left: -20px"
-        />
+        <div class="timePicker">
+          <a-date-picker @change="changeEndTime" default-value="2022-01-01" />
+        </div>
       </div>
       <button class="confirm1" @click="sumbitInfo">下一步</button>
     </div>
@@ -49,6 +43,14 @@
 
 <script>
 import axios from "axios";
+import Vue from "vue";
+import { DatePicker } from "ant-design-vue";
+import "ant-design-vue/dist/antd.css";
+//设置中文
+import moment from "moment";
+import "moment/locale/zh-cn";
+moment.locale("zh-cn");
+Vue.use(DatePicker);
 export default {
   name: "Setting",
   data() {
@@ -61,6 +63,9 @@ export default {
       ],
 
       compType: "",
+      moment, // 日历
+      startTime: "2021-01-01",
+      endTime: "2022-01-01",
     };
   },
   methods: {
@@ -73,8 +78,8 @@ export default {
       let params = {
         name: document.getElementById("name").value,
         compType: this.compType,
-        startDate: document.getElementById("startDate").value,
-        endDate: document.getElementById("endDate").value,
+        startDate: this.startTime,
+        endDate: this.endTime,
       };
       // this.$router.push({ path: "/setrule" });
       axios
@@ -95,17 +100,21 @@ export default {
           console.log(error);
         });
     },
+    changeStartTime(date, dateString) {
+      console.log(date, dateString);
+      this.startTime = dateString;
+      console.log("开始日期", this.startTime);
+    },
+    changeEndTime(date, dateString) {
+      console.log(date, dateString);
+      this.endTime = dateString;
+      console.log("结束日期", this.endTime);
+    },
   },
   mounted() {
     // 进来的时候调用添加
     console.log("初始化登录");
-    // this.util.setBodyBackGround();
   },
-  // beforeDestroy() {
-  //   // 离开页面的时候清除
-  //   console.log("清除页面登录");
-  //   this.util.clearBodyBackGround();
-  // },
 };
 </script>
 <style>
@@ -127,7 +136,8 @@ input::-webkit-input-placeholder {
   font-size: 16px;
   color: #1a1a1a;
 }
-.pub-list1 {
+.pub-list1,
+.pub-list11 {
   border-bottom: 1px solid #eceeef;
   margin-top: 5px;
 }
@@ -165,7 +175,8 @@ input::-webkit-input-placeholder {
   padding-right: 40px;
   /* box-shadow: -2px 0 3px -1px #ffffff; */
 }
-.pub-list1 span {
+.pub-list1 span,
+.pub-list11 span {
   font-family: FZLTHJW--GB1-0;
   font-size: 16px;
   transform: scale(0.5, 0.5);
@@ -208,5 +219,10 @@ input::-webkit-input-placeholder {
   height: 40px;
   margin-top: 10px;
   margin-left: 120px;
+}
+.timePicker {
+  display: inline-block;
+  width: 200px;
+  margin-left: -34px;
 }
 </style>

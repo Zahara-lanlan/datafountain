@@ -136,6 +136,9 @@ export default {
   margin-left: 25px;
   /* border: 1px solid red; */
 }
+textarea {
+  font-family: monospace;
+}
 .pub-list2 textarea {
   font-size: 14px;
   color: #a8adb2;
