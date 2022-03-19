@@ -110,6 +110,10 @@ export default {
       this.endTime = dateString;
       console.log("结束日期", this.endTime);
     },
+
+    changeHandel() {
+      console.log("22223333");
+    },
   },
   mounted() {
     // 进来的时候调用添加
@@ -118,6 +122,10 @@ export default {
 };
 </script>
 <style>
+.ant-calendar-picker-container {
+  transform: scale(0.5) !important;
+  transform-origin: top left !important ;
+}
 .pub-content {
   margin: auto;
   background: #ffffff;

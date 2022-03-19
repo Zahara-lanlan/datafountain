@@ -1,225 +1,232 @@
 <template>
-  <div class="container">
-    <div class="cmpt-container2">
-      <div class="competition-wrapper">
-        <!-- <div class="competition__avatar">
+  <div>
+    <div class="headers">
+      <span @click="gotoIndex">首页</span>
+      <button class="login" @click="gotoLogin">登录</button>
+      <button @click="gotoRegister">注册</button>
+    </div>
+    <div class="container">
+      <div class="cmpt-container2">
+        <div class="competition-wrapper">
+          <!-- <div class="competition__avatar">
           <img src="./../assets/img/game.jpg" />
         </div> -->
-        <div class="competition-info">
-          <div class="competition__survey">
-            <h2 class="competition__title">
-              {{ this.name }}
-            </h2>
-            <span class="compt__cmpt-type">{{ this.compyType }}</span>
-          </div>
-          <div class="competition__sponsor inline-vcenter">
-            <p>{{ this.compBackGround }}</p>
+          <div class="competition-info">
+            <div class="competition__survey">
+              <h2 class="competition__title">
+                {{ this.name }}
+              </h2>
+              <span class="compt__cmpt-type">{{ this.compyType }}</span>
+            </div>
+            <div class="competition__sponsor inline-vcenter">
+              <p>{{ this.compBackGround }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="sub-page">
-      <div class="nav-wrapper">
-        <ul role="menubar" class="el-menu">
-          <li tabindex="0" @click="changeDetailInfo">
-            <span class="el-menu-item is-active">赛制规则</span>
-          </li>
-          <li tabindex="1" @click="changeDetailInfo">
-            <span class="el-menu-item">数据与测评</span>
-          </li>
-          <li tabindex="2" @click="changeDetailInfo">
-            <span class="el-menu-item">常见问题</span>
-          </li>
-          <li tabindex="3" @click="changeDetailInfo">
-            <span class="el-menu-item">排行榜</span>
-          </li>
-          <li tabindex="4" @click="changeDetailInfo">
-            <span class="el-menu-item">参赛信息</span>
-          </li>
-        </ul>
-      </div>
-      <div class="page-content">
-        <!-- 赛制规则  -->
-        <div v-show="ruleVisible">
-          <div id="background">
-            <p id="back">
-              <i class="bg-img"></i><span class="page-title">大赛背景</span>
-              <span class="page-text">{{ this.compBackGround }}</span>
-            </p>
-          </div>
-
-          <div id="commIntro">
-            <p id="intro">
-              <i class="bg-img"></i><span class="page-title">赛题介绍</span>
-              <span class="page-text">{{ this.compIntro }}</span>
-            </p>
-          </div>
-
-          <div id="compRule">
-            <p id="rule">
-              <i class="bg-img"></i><span class="page-title">赛制规则</span>
-              <span class="page-text">{{ this.compRule }}</span>
-            </p>
-          </div>
-
-          <div id="compSchedule">
-            <p id="schedule">
-              <i class="bg-img"></i><span class="page-title">参赛规则</span>
-              <span class="page-text">{{ this.compSchedule }}</span>
-            </p>
-          </div>
+      <div class="sub-page">
+        <div class="nav-wrapper">
+          <ul role="menubar" class="el-menu">
+            <li tabindex="0" @click="changeDetailInfo">
+              <span class="el-menu-item is-active">赛制规则</span>
+            </li>
+            <li tabindex="1" @click="changeDetailInfo">
+              <span class="el-menu-item">数据与测评</span>
+            </li>
+            <li tabindex="2" @click="changeDetailInfo">
+              <span class="el-menu-item">常见问题</span>
+            </li>
+            <li tabindex="3" @click="changeDetailInfo">
+              <span class="el-menu-item">排行榜</span>
+            </li>
+            <li tabindex="4" @click="changeDetailInfo">
+              <span class="el-menu-item">参赛信息</span>
+            </li>
+          </ul>
         </div>
-        <!-- 数据与评测  -->
-        <div v-show="dataVisible">
-          <div class="data-set" v-show="setVisiable">
-            <div class="set">
-              <p class="setItem">
-                <span :fileName="fileName1" :type="type1"
-                  >测试集 - {{ this.fileName1 }}</span
-                >
-                <img
-                  src="./../assets/img/up3.png"
-                  alt=""
-                  @click="downCompData(fileName1, type1)"
-                />
+        <div class="page-content">
+          <!-- 赛制规则  -->
+          <div v-show="ruleVisible">
+            <div id="background">
+              <p id="back">
+                <i class="bg-img"></i><span class="page-title">大赛背景</span>
+                <span class="page-text">{{ this.compBackGround }}</span>
               </p>
             </div>
-            <div class="set">
-              <p class="setItem">
-                <span :fileName="fileName2" :type="type2"
-                  >训练集 - {{ this.fileName2 }}</span
-                >
-                <img
-                  src="./../assets/img/up3.png"
-                  alt=""
-                  @click="downCompData(fileName2, type2)"
-                />
+
+            <div id="commIntro">
+              <p id="intro">
+                <i class="bg-img"></i><span class="page-title">赛题介绍</span>
+                <span class="page-text">{{ this.compIntro }}</span>
+              </p>
+            </div>
+
+            <div id="compRule">
+              <p id="rule">
+                <i class="bg-img"></i><span class="page-title">赛制规则</span>
+                <span class="page-text">{{ this.compRule }}</span>
+              </p>
+            </div>
+
+            <div id="compSchedule">
+              <p id="schedule">
+                <i class="bg-img"></i><span class="page-title">参赛规则</span>
+                <span class="page-text">{{ this.compSchedule }}</span>
               </p>
             </div>
           </div>
-          <div id="dataIntro">
-            <p id="data">
-              <i class="bg-img"></i><span class="page-title">数据说明</span>
-              <span v-html="dataIntro" class="page-text"></span>
-            </p>
-          </div>
-
-          <div id="submissionRule">
-            <p id="submission">
-              <i class="bg-img"></i><span class="page-title">提交要求</span>
-              <span v-html="submissionRule" class="page-text"></span>
-            </p>
-          </div>
-
-          <div id="submissionExample">
-            <p id="example">
-              <i class="bg-img"></i><span class="page-title">提交实例</span>
-              <span v-html="submissionExample" class="page-text"></span>
-            </p>
-          </div>
-
-          <div id="evalCriteria">
-            <p id="criteria">
-              <i class="bg-img"></i> <span class="page-title">评测标准</span>
-              <span v-html="evalCriteria" class="page-text"></span>
-            </p>
-          </div>
-        </div>
-        <!-- 常见问题  -->
-        <div v-show="questionVisible">
-          <p>
-            <i class="bg-img"></i><span class="page-title">常见问题</span>
-            <span v-html="commonProblem" class="page-text"></span>
-          </p>
-        </div>
-        <!-- 排行榜  -->
-        <div v-show="rankVisible">
-          <div id="ranks">
-            <p id="rank">
-              <i class="bg-img"></i><span class="page-title">排行榜</span>
-            </p>
-          </div>
-          <table id="tbl" class="tbl" cellpadding="0" cellspacing="0">
-            <thead>
-              <tr>
-                <th class="th1">
-                  <div class="table_container">
-                    <span class="item-line1">排名</span>
-                  </div>
-                </th>
-                <th class="th2">
-                  <div class="table_container">
-                    <span class="item-line2">提交队伍</span>
-                  </div>
-                </th>
-                <th class="th3">
-                  <div class="table_container">
-                    <span class="item-line3">提交时间</span>
-                  </div>
-                </th>
-                <th class="th4">
-                  <div class="table_container">
-                    <span class="item-line4">最高得分</span>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item of compRank" :key="item.id">
-                <td>
-                  <div class="table_container">
-                    <span class="item-line1">{{ item.upResultId }}</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="table_container">
-                    <span class="item-line2">{{ item.groupName }}</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="table_container">
-                    <span class="item-line3">{{ item.updateTime }}</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="table_container">
-                    <span class="item-line3">{{ item.score }}</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- 参赛队伍  -->
-        <div v-show="teamVisible" class="team">
-          <div id="uploadsets">
-            <p id="set">
-              <i class="bg-img"></i><span class="page-title">上传数据集</span>
-              <span class="data-train" style="display: block">
-                <input
-                  id="dataTrain"
-                  type="file"
-                  placeholder="请输入比赛名称"
-                />
-              </span>
-              <button class="confirm-upload" @click="submitCompResult">
-                确定
-              </button>
-            </p>
-          </div>
-          <div id="teams">
-            <p id="team">
-              <i class="bg-img"></i><span class="page-title">参赛队伍</span>
-            </p>
-          </div>
-          <div class="team-container" v-for="item of teamData" :key="item.id">
-            <img :src="item.img" alt="" />
-            <div class="team-item">
-              <div class="team-name">
-                <span>{{ item.name }}</span>
+          <!-- 数据与评测  -->
+          <div v-show="dataVisible">
+            <div class="data-set" v-show="setVisiable">
+              <div class="set">
+                <p class="setItem">
+                  <span :fileName="fileName1" :type="type1"
+                    >测试集 - {{ this.fileName1 }}</span
+                  >
+                  <img
+                    src="./../assets/img/up3.png"
+                    alt=""
+                    @click="downCompData(fileName1, type1)"
+                  />
+                </p>
               </div>
-              <div class="team-slogan">
-                <span>{{ item.slogan }}</span>
+              <div class="set">
+                <p class="setItem">
+                  <span :fileName="fileName2" :type="type2"
+                    >训练集 - {{ this.fileName2 }}</span
+                  >
+                  <img
+                    src="./../assets/img/up3.png"
+                    alt=""
+                    @click="downCompData(fileName2, type2)"
+                  />
+                </p>
+              </div>
+            </div>
+            <div id="dataIntro">
+              <p id="data">
+                <i class="bg-img"></i><span class="page-title">数据说明</span>
+                <span v-html="dataIntro" class="page-text"></span>
+              </p>
+            </div>
+
+            <div id="submissionRule">
+              <p id="submission">
+                <i class="bg-img"></i><span class="page-title">提交要求</span>
+                <span v-html="submissionRule" class="page-text"></span>
+              </p>
+            </div>
+
+            <div id="submissionExample">
+              <p id="example">
+                <i class="bg-img"></i><span class="page-title">提交实例</span>
+                <span v-html="submissionExample" class="page-text"></span>
+              </p>
+            </div>
+
+            <div id="evalCriteria">
+              <p id="criteria">
+                <i class="bg-img"></i> <span class="page-title">评测标准</span>
+                <span v-html="evalCriteria" class="page-text"></span>
+              </p>
+            </div>
+          </div>
+          <!-- 常见问题  -->
+          <div v-show="questionVisible">
+            <p>
+              <i class="bg-img"></i><span class="page-title">常见问题</span>
+              <span v-html="commonProblem" class="page-text"></span>
+            </p>
+          </div>
+          <!-- 排行榜  -->
+          <div v-show="rankVisible">
+            <div id="ranks">
+              <p id="rank">
+                <i class="bg-img"></i><span class="page-title">排行榜</span>
+              </p>
+            </div>
+            <table id="tbl" class="tbl" cellpadding="0" cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="th1">
+                    <div class="table_container">
+                      <span class="item-line1">排名</span>
+                    </div>
+                  </th>
+                  <th class="th2">
+                    <div class="table_container">
+                      <span class="item-line2">提交队伍</span>
+                    </div>
+                  </th>
+                  <th class="th3">
+                    <div class="table_container">
+                      <span class="item-line3">提交时间</span>
+                    </div>
+                  </th>
+                  <th class="th4">
+                    <div class="table_container">
+                      <span class="item-line4">最高得分</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item of compRank" :key="item.id">
+                  <td>
+                    <div class="table_container">
+                      <span class="item-line1">{{ item.upResultId }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table_container">
+                      <span class="item-line2">{{ item.groupName }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table_container">
+                      <span class="item-line3">{{ item.updateTime }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table_container">
+                      <span class="item-line3">{{ item.score }}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- 参赛队伍  -->
+          <div v-show="teamVisible" class="team">
+            <div id="uploadsets">
+              <p id="set">
+                <i class="bg-img"></i><span class="page-title">上传数据集</span>
+                <span class="data-train" style="display: block">
+                  <input
+                    id="dataTrain"
+                    type="file"
+                    placeholder="请输入比赛名称"
+                  />
+                </span>
+                <button class="confirm-upload" @click="submitCompResult">
+                  确定
+                </button>
+              </p>
+            </div>
+            <div id="teams">
+              <p id="team">
+                <i class="bg-img"></i><span class="page-title">参赛队伍</span>
+              </p>
+            </div>
+            <div class="team-container" v-for="item of teamData" :key="item.id">
+              <img :src="item.img" alt="" />
+              <div class="team-item">
+                <div class="team-name">
+                  <span>{{ item.name }}</span>
+                </div>
+                <div class="team-slogan">
+                  <span>{{ item.slogan }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -603,10 +610,53 @@ export default {
           console.log(error);
         });
     },
+    gotoLogin() {
+      this.$router.push({ path: "/login" });
+    },
+    gotoRegister() {
+      this.$router.push({ path: "/register" });
+    },
+    gotoIndex() {
+      this.$router.push({ path: "/competition" });
+    },
   },
 };
 </script>
 <style scoped>
+.headers {
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.headers span {
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  margin-left: 100px;
+}
+.headers button {
+  margin-top: -2px;
+  /* float: right; */
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.headers button:last-child {
+  /* margin-right: 100px; */
+  margin-left: -30px;
+  background: #00c1de;
+}
+.login {
+  margin-left: 450px;
+}
 .container {
   width: 550px;
   height: 100%;
