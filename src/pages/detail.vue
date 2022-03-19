@@ -361,7 +361,7 @@ export default {
           item.children[0].getBoundingClientRect().width + "px";
 
         item.style.height =
-          item.children[0].getBoundingClientRect().height + 10 + "px";
+          item.children[0].getBoundingClientRect().height + "px";
       });
     } else if (this.pageId === "4") {
       this.setDomHeight("uploadsets", "set");
