@@ -26,7 +26,6 @@ export default {
   name: "Login",
   data() {
     return {
-      bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
     };
   },
   methods: {
@@ -41,7 +40,7 @@ export default {
     // },
     handelClick() {
       console.log("提交登录");
-      this.$router.push({ path: "/competition" });
+      this.$router.push({ path: "/" });
     },
     gotoRegister() {},
   },

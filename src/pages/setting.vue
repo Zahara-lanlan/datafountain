@@ -9,7 +9,29 @@
       </div>
       <div class="pub-list1">
         <span>比赛类型</span>
-        <div class="option" style="display: inline-block">
+        <div class="divInput">
+          <div class="input" @click="openValue">
+            <input
+              v-model="value" readonly="true"  
+              type="text"
+              class="input-box"
+              placeholder="未选择"
+            />
+            <img src="../assets/img/arrow.png" alt="" />
+          </div>
+          <div class="list" v-show="show">
+            <ul>
+              <li
+                @click="getvalue(index, item)"
+                v-for="(item, index) in selectClassData"
+                :key="item.index"
+              >
+                {{ item.title }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="option" style="display: inline-block">
           <select class="pub-type" @change="selectClass($event)">
             <option value="NONE">未选择</option>
             <option
@@ -20,7 +42,7 @@
               {{ options.title }}
             </option>
           </select>
-        </div>
+        </div> -->
 
         <!-- <input type="text" id="compType" placeholder="请输入比赛类型" /> -->
       </div>
@@ -55,13 +77,14 @@ export default {
   name: "Setting",
   data() {
     return {
-      bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
       selectClassData: [
+        { title: "未选择" },
         { title: "分类" },
         { title: "图像修复" },
         { title: "图像分割" },
       ],
-
+      show: false,
+      value: "",
       compType: "",
       moment, // 日历
       startTime: "2021-01-01",
@@ -114,10 +137,24 @@ export default {
     changeHandel() {
       console.log("22223333");
     },
+    openValue() {
+      this.show = !this.show;
+    },
+    getvalue(index, item) {
+      this.value = item.title;
+      this.show = false;
+    },
   },
   mounted() {
     // 进来的时候调用添加
     console.log("初始化登录");
+    document.addEventListener("click", (e) => {
+      console.log(e.target);
+      // this.handelInputList();
+      if (e.target !== document.querySelector(".input-box")) {
+        this.show = false;
+      }
+    });
   },
 };
 </script>
@@ -209,7 +246,7 @@ input::-webkit-input-placeholder {
   /* border: 1px solid red; */
   position: absolute;
   top: px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .confirm1 {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
@@ -226,11 +263,69 @@ input::-webkit-input-placeholder {
   width: 220px;
   height: 40px;
   margin-top: 10px;
-  margin-left: 120px;
+  margin-left: 100px;
 }
 .timePicker {
   display: inline-block;
   width: 200px;
   margin-left: -34px;
+}
+
+.divInput {
+  /* margin: 200px; */
+  display: inline-block;
+}
+ul li {
+  list-style: none;
+}
+.input {
+  width: 140px;
+  height: 15px;
+  line-height: 40px;
+  padding-left: 10px;
+  position: relative;
+}
+.input-box {
+  border: none;
+  outline: none;
+  width: 90%;
+  height: 55px !important;
+}
+.input img {
+  position: absolute;
+  width: 10px;
+  right: 50px;
+  top: 18%;
+}
+.list {
+  width: 115px;
+  border: 0.13333vw solid #fff;
+
+  box-shadow: 0 0.26667vw 1.06667vw rgb(0 0 0 / 15%);
+
+  overflow: hidden;
+  position: absolute;
+  z-index: 999;
+  background: rgb(255, 255, 255);
+}
+.list ul {
+  padding: 0;
+  margin: 0;
+}
+.list ul li {
+  width: 100%;
+  /* height: 30px; */
+  cursor: pointer;
+  /* line-height: 30px; */
+  padding-left: 10px;
+  transform: scale(0.6);
+}
+.list ul li:hover {
+  background-color: #cccccc;
+}
+.input-box {
+  margin-top: -13px !important;
+
+  margin-left: 28px !important;
 }
 </style>

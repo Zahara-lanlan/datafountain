@@ -242,7 +242,7 @@ export default {
   name: "Detail",
   data() {
     return {
-      bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
+      // bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
       compId: this.$route.query.compId,
       name: this.$route.query.name,
       compyType: this.$route.query.compType,
@@ -267,8 +267,8 @@ export default {
       setVisiable: false,
       rankVisible: false,
       teamVisible: false,
-      rankData: "",
-      teamData: "",
+      compRank: [],
+      teamData: [],
     };
   },
   mounted() {
@@ -617,7 +617,7 @@ export default {
       this.$router.push({ path: "/register" });
     },
     gotoIndex() {
-      this.$router.push({ path: "/competition" });
+      this.$router.push({ path: "/" });
     },
   },
 };

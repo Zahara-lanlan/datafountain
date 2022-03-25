@@ -22,7 +22,6 @@ export default {
   name: "UploadData",
   data() {
     return {
-      bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
     };
   },
   methods: {

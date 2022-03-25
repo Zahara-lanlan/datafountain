@@ -42,7 +42,6 @@ export default {
   pageId: 0,
   data() {
     return {
-      bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
       competList: [],
       page: 1,
     };

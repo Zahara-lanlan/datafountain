@@ -50,7 +50,6 @@ export default {
   name: "SetRule",
   data() {
     return {
-      bodyBgImage: "url(" + require("./../assets/img/R.jpeg") + ")",
     };
   },
   methods: {

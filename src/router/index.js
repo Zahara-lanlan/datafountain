@@ -6,21 +6,22 @@ Vue.use(Router);
  * 路由配置信息
  */
 export default new Router({
+  // mode: 'history',
   routes: [
     {
       path: "/",
-      name: "Login",
-      component: () => import("@/pages/login.vue"),
-      meta: {
-        title: "登录",
-      },
-    },
-    {
-      path: "/competition",
       name: "Competition",
       component: () => import("@/pages/competition.vue"),
       meta: {
         title: "比赛",
+      },
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: () => import("@/pages/login.vue"),
+      meta: {
+        title: "登录",
       },
     },
     {
