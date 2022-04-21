@@ -97,5 +97,13 @@ export default new Router({
         title: "评价",
       },
     },
+    {
+      path: "/setevaluate",
+      name: "SetEvaluate",
+      component: () => import("@/pages/set-evaluate.vue"),
+      meta: {
+        title: "评估指标",
+      },
+    },
   ],
 });

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="header">
-      <span>首页</span>
+      <!-- <span>首页</span> -->
+      <span @click="gotoPublish">我要发布</span>
       <button class="login" @click="gotoLogin">登录</button>
       <button @click="gotoRegister">注册</button>
     </div>
@@ -131,6 +132,9 @@ export default {
     gotoRegister() {
       this.$router.push({ path: "/register" });
     },
+    gotoPublish() {
+      this.$router.push({ path: "/login" });
+    },
   },
 };
 </script>
@@ -142,13 +146,14 @@ export default {
   width: 100%;
   height: 25px;
   background: #000;
+  padding-left: 70px;
 }
 .header span {
   color: #cdcdcd;
   font-size: 14px;
   display: inline-block;
   transform: scale(0.5);
-  margin-left: 100px;
+  /* margin-left: 100px; */
 }
 .header button {
   margin-top: -2px;

@@ -1,45 +1,52 @@
 <template>
-  <div class="pub-content">
-    <p class="pub-title">设置比赛规则</p>
+  <div>
+    <div class="header3">
+      <span>首页</span>
+      <button @click="gotoIndex">退出</button>
+    </div>
 
-    <div class="pub-item2">
-      <div class="pub-list2">
-        <span>比赛背景</span>
-        <textarea
-          rows="5"
-          cols="45"
-          id="compBackGround"
-          placeholder="请输入比赛背景"
-        />
+    <div class="pub-content">
+      <p class="pub-title">设置比赛规则</p>
+
+      <div class="pub-item2">
+        <div class="pub-list2">
+          <span>比赛背景</span>
+          <textarea
+            rows="5"
+            cols="45"
+            id="compBackGround"
+            placeholder="请输入比赛背景"
+          />
+        </div>
+        <div class="pub-list2">
+          <span>比赛介绍</span>
+          <textarea
+            rows="5"
+            cols="45"
+            id="compIntro"
+            placeholder="请输入比赛介绍"
+          />
+        </div>
+        <div class="pub-list2">
+          <span>比赛日程</span>
+          <textarea
+            rows="5"
+            cols="45"
+            id="compSchedule"
+            placeholder="请输入比赛日程"
+          />
+        </div>
+        <div class="pub-list2">
+          <span>比赛规则</span>
+          <textarea
+            rows="5"
+            cols="45"
+            id="compRule"
+            placeholder="请输入比赛规则"
+          />
+        </div>
+        <button class="confirm2" @click="submitInfo">下一步</button>
       </div>
-      <div class="pub-list2">
-        <span>比赛介绍</span>
-        <textarea
-          rows="5"
-          cols="45"
-          id="compIntro"
-          placeholder="请输入比赛介绍"
-        />
-      </div>
-      <div class="pub-list2">
-        <span>比赛日程</span>
-        <textarea
-          rows="5"
-          cols="45"
-          id="compSchedule"
-          placeholder="请输入比赛日程"
-        />
-      </div>
-      <div class="pub-list2">
-        <span>比赛规则</span>
-        <textarea
-          rows="5"
-          cols="45"
-          id="compRule"
-          placeholder="请输入比赛规则"
-        />
-      </div>
-      <button class="confirm2" @click="submitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -49,8 +56,7 @@ import axios from "axios";
 export default {
   name: "Testing",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     submitInfo() {
@@ -79,6 +85,9 @@ export default {
           console.log(error);
         });
       // this.$router.push({ path: "/setdata" });
+    },
+    gotoIndex() {
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {
@@ -154,7 +163,7 @@ input::-webkit-input-placeholder {
   color: #a8adb2;
 }
 .confirm2 {
-  background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
+  background-color: rgb(135, 208, 104);
   border-radius: 20px;
   border-radius: 20px;
   font-family: FZLTZHJW--GB1-0;
@@ -168,5 +177,32 @@ input::-webkit-input-placeholder {
   height: 40px;
   margin-top: 10px;
   margin-left: 120px;
+}
+.header3 {
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.header3 span {
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  margin-left: 100px;
+}
+.header3 button {
+  margin-top: -2px;
+  float: right;
+  margin-right: 90px;
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 </style>

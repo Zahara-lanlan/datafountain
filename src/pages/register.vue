@@ -1,10 +1,11 @@
 <template>
   <div>
-    <router-link to="/login">
-      <div class="register-btn" @click="gotoRegister">登录</div>
-    </router-link>
+    <div class="header11">
+      <span @click="gotoIndex">首页</span>
+      <button @click="gotoLogin">登录</button>
+    </div>
 
-    <div id="login-box">
+    <div id="login-box2">
       <h1>注册</h1>
       <div class="form">
         <div class="item">
@@ -28,7 +29,12 @@ export default {
     handelClick() {
       console.log("提交登录");
     },
-    gotoRegister() {},
+    gotoLogin() {
+      this.$router.push({ path: "/login" });
+    },
+    gotoIndex() {
+      this.$router.push({ path: "/" });
+    },
   },
   mounted() {
     console.log("初始化注册");
@@ -42,8 +48,8 @@ export default {
 };
 </script>
 <style>
-#login-box {
-  width: 30%;
+#login-box2 {
+  width: 36%;
   height: auto;
   margin: 0 auto;
   margin-top: 13%;
@@ -51,16 +57,18 @@ export default {
   background: #fff;
   padding: 10px 50px;
   position: relative;
+  /* border: 1px solid #d9d9d9; */
   /* 9c9c9c */
 }
-#login-box h1 {
+#login-box2 h1 {
   color: #9c9c9c;
   font-size: 14px;
 }
-#login-box .form .item {
+#login-box2 .form .item {
   margin-top: 15px;
+  /* margin-left: 43px; */
 }
-#login-box .form .item i {
+#login-box2 .form .item i {
   font-size: 18px;
   color: #9c9c9c;
 }
@@ -70,46 +78,56 @@ input {
   -webkit-tap-highlight-color: #9c9c9c;
   -webkit-tap-highlight-color: transparent;
 }
-#login-box .form .item input {
+#login-box2 .form .item input {
   width: 180px;
   font-size: 12px;
   border: 0;
-  border-bottom: 2px solid #9c9c9c;
+  border-bottom: 1px solid #9c9c9c;
   padding: 5px 10px;
   background: #fff;
   color: #9c9c9c;
-}
-#login-box button {
-  margin-top: 20px;
-  width: 190px;
-  height: 30px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  /* background-image: linear-gradient(to right, #89f7fe 0%, #66a6ff 100%); */
-margin-bottom: 15px;
-  background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
-  border: 0;
-  border-radius: 15px;
-}
-.register-btn {
-  /* position: absolute; */
-  float: right;
-  font-weight: 400;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  height: 30px;
-  line-height: 30px;
   text-align: center;
-  border: 1px solid #6a6a6a;
-  font-size: 12px;
-  padding: 0 28px;
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 2px;
-  color: #9c9c9c !important;
+}
+#login-box2 button {
+  background-color: rgb(135, 208, 104);
+  border-radius: 2.66667vw;
+  font-family: FZLTZHJW--GB1-0;
+  font-size: 2.4vw;
+  color: #ffffff;
   border: none;
-  margin-top: -12%;
-  /* background-image: linear-gradient(to right, #89f7fe 0%, #66a6ff 100%); */
+  outline: none;
+  transform: scale(0.5, 0.5);
+  transform-origin: center;
+  width: 29.33333vw;
+  height: 5.33333vw;
+  margin-top: 1.33333vw;
+  /* margin-left: -13px; */
+}
+.header11 {
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.header11 span {
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  margin-left: 100px;
+}
+.header11 button {
+  margin-top: -2px;
+  float: right;
+  margin-right: 90px;
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 </style>

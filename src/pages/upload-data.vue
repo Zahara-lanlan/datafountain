@@ -21,8 +21,7 @@ import axios from "axios";
 export default {
   name: "UploadData",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     sumbitInfo() {
@@ -125,7 +124,7 @@ export default {
 }
 .confirm5 {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
-  background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
+  background-color: rgb(135, 208, 104);
   border-radius: 20px;
   border-radius: 20px;
   font-family: FZLTZHJW--GB1-0;

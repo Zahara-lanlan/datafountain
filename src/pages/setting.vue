@@ -1,37 +1,43 @@
 <template>
-  <div class="pub-content">
-    <p class="pub-title">创建比赛</p>
+  <div>
+    <div class="header2">
+      <span>首页</span>
+      <button @click="gotoIndex">退出</button>
+    </div>
+    <div class="pub-content">
+      <p class="pub-title">创建比赛</p>
 
-    <div class="pub-item1">
-      <div class="pub-list1">
-        <span>比赛名称</span>
-        <input id="name" type="text" placeholder="请输入比赛名称" />
-      </div>
-      <div class="pub-list1">
-        <span>比赛类型</span>
-        <div class="divInput">
-          <div class="input" @click="openValue">
-            <input
-              v-model="value" readonly="true"  
-              type="text"
-              class="input-box"
-              placeholder="未选择"
-            />
-            <img src="../assets/img/arrow.png" alt="" />
-          </div>
-          <div class="list" v-show="show">
-            <ul>
-              <li
-                @click="getvalue(index, item)"
-                v-for="(item, index) in selectClassData"
-                :key="item.index"
-              >
-                {{ item.title }}
-              </li>
-            </ul>
-          </div>
+      <div class="pub-item1">
+        <div class="pub-list1">
+          <span>比赛名称</span>
+          <input id="name" type="text" placeholder="请输入比赛名称" />
         </div>
-        <!-- <div class="option" style="display: inline-block">
+        <div class="pub-list1">
+          <span>比赛类型</span>
+          <div class="divInput">
+            <div class="input" @click="openValue">
+              <input
+                v-model="value"
+                readonly="true"
+                type="text"
+                class="input-box"
+                placeholder="未选择"
+              />
+              <img src="../assets/img/arrow.png" alt="" />
+            </div>
+            <div class="list" v-show="show">
+              <ul>
+                <li
+                  @click="getvalue(index, item)"
+                  v-for="(item, index) in selectClassData"
+                  :key="item.index"
+                >
+                  {{ item.title }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- <div class="option" style="display: inline-block">
           <select class="pub-type" @change="selectClass($event)">
             <option value="NONE">未选择</option>
             <option
@@ -44,21 +50,25 @@
           </select>
         </div> -->
 
-        <!-- <input type="text" id="compType" placeholder="请输入比赛类型" /> -->
-      </div>
-      <div class="pub-list11">
-        <span>比赛开始时间</span>
-        <div class="timePicker">
-          <a-date-picker @change="changeStartTime" default-value="2021-01-01" />
+          <!-- <input type="text" id="compType" placeholder="请输入比赛类型" /> -->
         </div>
-      </div>
-      <div class="pub-list11">
-        <span>比赛结束时间</span>
-        <div class="timePicker">
-          <a-date-picker @change="changeEndTime" default-value="2022-01-01" />
+        <div class="pub-list11">
+          <span>比赛开始时间</span>
+          <div class="timePicker">
+            <a-date-picker
+              @change="changeStartTime"
+              default-value="2021-01-01"
+            />
+          </div>
         </div>
+        <div class="pub-list11">
+          <span>比赛结束时间</span>
+          <div class="timePicker">
+            <a-date-picker @change="changeEndTime" default-value="2022-01-01" />
+          </div>
+        </div>
+        <button class="confirm1" @click="sumbitInfo">下一步</button>
       </div>
-      <button class="confirm1" @click="sumbitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -110,8 +120,12 @@ export default {
         .then((data) => {
           if (data.data.status == "1") {
             console.log("创建比赛成功");
+            // this.$router.push({
+            //   path: "/setrule",
+            //   query: { compId: data.data.compId },
+            // });
             this.$router.push({
-              path: "/setrule",
+              path: "/setevaluate",
               query: { compId: data.data.compId },
             });
           } else {
@@ -143,6 +157,10 @@ export default {
     getvalue(index, item) {
       this.value = item.title;
       this.show = false;
+      this.compType = item.title;
+    },
+    gotoIndex() {
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {
@@ -250,7 +268,7 @@ input::-webkit-input-placeholder {
 }
 .confirm1 {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
-  background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
+  background-color: rgb(135, 208, 104);
   border-radius: 20px;
   border-radius: 20px;
   font-family: FZLTZHJW--GB1-0;
@@ -327,5 +345,32 @@ ul li {
   margin-top: -13px !important;
 
   margin-left: 28px !important;
+}
+.header2 {
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.header2 span {
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  margin-left: 100px;
+}
+.header2 button {
+  margin-top: -2px;
+  float: right;
+  margin-right: 90px;
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 </style>

@@ -1,45 +1,51 @@
 <template>
-  <div class="pub-content">
-    <p class="pub-title">设置数据与评测</p>
+  <div>
+    <div class="header2">
+      <span>首页</span>
+      <button @click="gotoIndex">退出</button>
+    </div>
+    <div class="pub-content">
+      <p class="pub-title">设置数据与评测</p>
 
-    <div class="pub-item3">
-      <div class="pub-list3">
-        <span>数据说明</span>
-        <textarea
-          id="dataIntro"
-          rows="5"
-          cols="45"
-          placeholder="请输入数据说明"
-        />
+      <div class="pub-item3">
+        <div class="pub-list3">
+          <span>数据说明</span>
+          <textarea
+            id="dataIntro"
+            rows="5"
+            cols="45"
+            placeholder="请输入数据说明"
+          />
+        </div>
+        <div class="pub-list3">
+          <span>提交要求</span>
+          <textarea
+            id="submissionRule"
+            rows="5"
+            cols="45"
+            placeholder="请输入提交要求"
+          />
+        </div>
+        <div class="pub-list3">
+          <span>提交示例</span>
+          <textarea
+            id="submissionExample"
+            rows="5"
+            cols="45"
+            placeholder="请输入提交示例"
+          />
+        </div>
+        <div class="pub-list3">
+          <span>评测标准</span>
+          <textarea
+            id="evalCriteria"
+            rows="5"
+            cols="45"
+            placeholder="请输入评测标准"
+          />
+        </div>
+        <button class="confirm3" @click="submitInfo">下一步</button>
       </div>
-      <div class="pub-list3">
-        <span>提交要求</span>
-        <textarea
-          id="submissionRule"
-          rows="5"
-          cols="45"
-          placeholder="请输入提交要求"
-        />
-      </div>
-      <div class="pub-list3">
-        <span>提交示例</span>
-        <textarea
-          id="submissionExample"
-          rows="5"
-          cols="45"
-          placeholder="请输入提交示例"
-        />
-      </div>
-      <div class="pub-list3">
-        <span>评测标准</span>
-        <textarea
-          id="evalCriteria"
-          rows="5"
-          cols="45"
-          placeholder="请输入评测标准"
-        />
-      </div>
-      <button class="confirm3" @click="submitInfo">下一步</button>
     </div>
   </div>
 </template>
@@ -49,8 +55,7 @@ import axios from "axios";
 export default {
   name: "SetRule",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     submitInfo() {
@@ -79,6 +84,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    gotoIndex() {
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {
@@ -151,7 +159,7 @@ input::-webkit-input-placeholder {
 }
 
 .confirm3 {
-  background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
+  background-color: rgb(135, 208, 104);
   border-radius: 20px;
   border-radius: 20px;
   font-family: FZLTZHJW--GB1-0;
@@ -165,5 +173,32 @@ input::-webkit-input-placeholder {
   height: 40px;
   margin-top: 10px;
   margin-left: 120px;
+}
+.header2 {
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.header2 span {
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  margin-left: 100px;
+}
+.header2 button {
+  margin-top: -2px;
+  float: right;
+  margin-right: 90px;
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 </style>

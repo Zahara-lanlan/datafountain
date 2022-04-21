@@ -1,24 +1,29 @@
 <template>
-  <div class="pub-content">
-    <p class="pub-title">设置常见问题</p>
+  <div>
+    <div class="header1">
+      <span>首页</span>
+      <button @click="gotoIndex">退出</button>
+    </div>
+    <div class="pub-content">
+      <p class="pub-title">设置常见问题</p>
 
-    <div class="pub-item4">
-      <div class="pub-list4">
-        <span>常见问题</span>
-        <!-- <input
+      <div class="pub-item4">
+        <div class="pub-list4">
+          <span>常见问题</span>
+          <!-- <input
           type="textarea"
           id="commonProblem"
           placeholder="请输入常见问题"
         /> -->
-        <textarea
-          id="commonProblem"
-          rows="15"
-          cols="30"
-          placeholder="请输入常见问题"
-        >
-        </textarea>
-      </div>
-      <!-- <div class="pub-list4">
+          <textarea
+            id="commonProblem"
+            rows="15"
+            cols="30"
+            placeholder="请输入常见问题"
+          >
+          </textarea>
+        </div>
+        <!-- <div class="pub-list4">
         <span>比赛介绍</span>
         <input type="text" placeholder="请输入比赛介绍" />
       </div>
@@ -38,7 +43,8 @@
           style="margin-left: 14px"
         />
       </div> -->
-      <button class="confirm4" @click="submitInfo">下一步</button>
+        <button class="confirm4" @click="submitInfo">下一步</button>
+      </div>
     </div>
   </div>
 </template>
@@ -48,8 +54,7 @@ import axios from "axios";
 export default {
   name: "SetRule",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     submitInfo() {
@@ -75,6 +80,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    gotoIndex() {
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {
@@ -150,7 +158,7 @@ input::-webkit-input-placeholder {
 
 .confirm4 {
   /* background-image: linear-gradient(140deg, #5a92b7 0%, #584dc4 100%); */
-  background-image: linear-gradient(140deg, #5a92b7 0%, #363448 100%);
+  background-color: rgb(135, 208, 104);
   border-radius: 20px;
   border-radius: 20px;
   font-family: FZLTZHJW--GB1-0;
@@ -165,5 +173,32 @@ input::-webkit-input-placeholder {
   margin-top: -7.66667vw;
   margin-left: 16vw;
   position: absolute;
+}
+.header1 {
+  width: 100%;
+  height: 25px;
+  background: #000;
+}
+.header1 span {
+  color: #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  margin-left: 100px;
+}
+.header1 button {
+  margin-top: -2px;
+  float: right;
+  margin-right: 90px;
+  color: #fff;
+  border: 0.5px solid #cdcdcd;
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(0.5);
+  background: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 </style>
