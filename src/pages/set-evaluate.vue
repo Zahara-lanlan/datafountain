@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="header1">
-      <span>首页</span>
-      <button @click="gotoIndex">退出</button>
+      <span @click="gotoIndex">首页</span>
+      <button @click="gotoPublish">创建比赛</button>
+      <button @click="gotoIndex">已发布比赛</button>
     </div>
     <div class="pub-content">
       <h2 class="title">评委主观评价</h2>
@@ -24,19 +25,31 @@
           <div>
             <input type="radio" name="target" id="yes" />
             <label for="yes">是</label>
+
             <input type="radio" name="target" id="no" />
             <label for="no">否</label>
           </div>
+          <div class="input-item">
+            <input type="number" id="" value="5" />
+          </div>
         </div>
         <div class="sub-item">
-          <input id="checkbox1" type="checkbox" />
-          <label for="checkbox1">PSNR</label> <br />
-          <input id="checkbox2" type="checkbox" />
-          <label for="checkbox2">SSIM</label> <br />
-          <input id="checkbox3" type="checkbox" />
-          <label for="checkbox3">IOU</label> <br />
-          <input id="checkbox3" type="checkbox" />
-          <label for="checkbox3">FI</label> <br />
+          <div>
+            <input id="checkbox1" type="checkbox" />
+            <label for="checkbox1">PSNR</label>
+          </div>
+          <div>
+            <input id="checkbox2" type="checkbox" />
+            <label for="checkbox2">SSIM</label>
+          </div>
+          <div>
+            <input id="checkbox3" type="checkbox" />
+            <label for="checkbox3">IOU</label>
+          </div>
+          <div>
+            <input id="checkbox3" type="checkbox" />
+            <label for="checkbox3">FI</label>
+          </div>
         </div>
         <div class="item third-item">
           <span>主观评价</span>
@@ -46,16 +59,34 @@
             <input type="radio" name="evaluate" value="noo" />
             <label for="noo">否</label>
           </div>
+          <div class="input-item">
+            <input type="number" id="" value="5" />
+          </div>
         </div>
-        <div class="item fourth-item">
+        <div class="fourth-item">
           <span>颜值评分</span>
           <div>
-            <input id="checkbox3" type="checkbox" />
-            <label for="checkbox3">评分模型</label> <br />
-            <input id="checkbox3" type="checkbox" />
-            <label for="checkbox3">旷视API</label> <br />
-            <input id="checkbox3" type="checkbox" />
-            <label for="checkbox3">主观评价</label> <br />
+            <div>
+              <input id="checkbox4" type="checkbox" />
+              <label for="checkbox4">评分模型</label>
+              <div class="input-item" id="item1">
+                <input type="number" id="" value="5" />
+              </div>
+            </div>
+            <div>
+              <input id="checkbox5" type="checkbox" />
+              <label for="checkbox5">旷视API</label>
+              <div class="input-item" id="item2">
+                <input type="number" id="" value="5" />
+              </div>
+            </div>
+            <div>
+              <input id="checkbox6" type="checkbox" />
+              <label for="checkbox6">主观评价</label>
+              <div class="input-item" id="item3">
+                <input type="number" id="" value="5" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -88,6 +119,9 @@ export default {
     },
     gotoIndex() {
       this.$router.push({ path: "/" });
+    },
+    gotoPublish() {
+      this.$router.push({ path: "/setting" });
     },
   },
   mounted() {
@@ -151,17 +185,43 @@ export default {
 .second-item {
   margin-top: 20px;
 }
+.second-item div {
+  display: flex;
+  margin-top: 2px;
+}
 .third-item,
 .fourth-item {
   margin-top: 5px;
 }
+.third-item div {
+  display: flex;
+  margin-top: 2px;
+}
+
 .item div {
   margin-left: 37px;
+}
+.fourth-item {
+  display: flex;
+}
+.fourth-item div {
+  margin-left: 19px;
+  padding-top: 1px;
+}
+.fourth-item div div {
+  display: flex;
+}
+.fourth-item div div label {
+  padding-top: 1px;
 }
 .sub-item {
   margin-left: 128px;
 }
-.item span {
+.sub-item div {
+  display: flex;
+}
+.item span,
+.fourth-item span {
   font-family: FZLTHJW--GB1-0;
   font-size: 2.13333vw;
   transform: scale(0.5, 0.5);
@@ -186,6 +246,7 @@ select {
 .wrapper input {
   font-size: 12px;
   transform: scale(0.7);
+  margin-top: 3px;
   /* zoom: 4; */
 }
 .wrapper label {
@@ -193,6 +254,7 @@ select {
   transform: scale(0.8);
   display: inline-block;
   color: #5f656b;
+  padding-top: 1px;
 }
 
 .header1 {
@@ -221,5 +283,33 @@ select {
   padding-right: 20px;
   padding-top: 4px;
   padding-bottom: 4px;
+}
+.header1 button:last-child {
+  /* margin-right: 100px; */
+  margin-right: -42px;
+  background: #00c1de;
+}
+.input-item input {
+  border: 1px solid #a8adb2;
+  outline: none;
+  width: 40px;
+  color: #a8adb2;
+}
+#item1 {
+  margin-left: 26px;
+}
+#item2 {
+  margin-left: 29px;
+}
+#item3 {
+  margin-left: 26px;
+}
+.fourth-item label {
+  margin-top: 5px;
+}
+#checkbox4,
+#checkbox5,
+#checkbox6 {
+  margin-top: 8px;
 }
 </style>

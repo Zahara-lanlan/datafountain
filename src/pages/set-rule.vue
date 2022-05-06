@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="header3">
-      <span>首页</span>
-      <button @click="gotoIndex">退出</button>
+      <span @click="gotoIndex">首页</span>
+      <button @click="gotoPublish">创建比赛</button>
+      <button @click="gotoIndex">已发布比赛</button>
     </div>
 
     <div class="pub-content">
@@ -88,6 +89,9 @@ export default {
     },
     gotoIndex() {
       this.$router.push({ path: "/" });
+    },
+    gotoPublish() {
+      this.$router.push({ path: "/setting" });
     },
   },
   mounted() {
@@ -204,5 +208,10 @@ input::-webkit-input-placeholder {
   padding-right: 20px;
   padding-top: 4px;
   padding-bottom: 4px;
+}
+.header3 button:last-child {
+  /* margin-right: 100px; */
+  margin-right: -42px;
+  background: #00c1de;
 }
 </style>

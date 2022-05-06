@@ -16,8 +16,10 @@
           <i class="fa fa-search" style="font-size: 24px"></i>
           <input type="text" placeholder="请输入密码" />
         </div>
+        <div class="item">
+          <button @click="handelClick">注册</button>
+        </div>
       </div>
-      <button @click="handelClick">注册</button>
     </div>
   </div>
 </template>
@@ -79,7 +81,7 @@ input {
   -webkit-tap-highlight-color: transparent;
 }
 #login-box2 .form .item input {
-  width: 180px;
+  /* width: 180px; */
   font-size: 12px;
   border: 0;
   border-bottom: 1px solid #9c9c9c;
@@ -92,14 +94,12 @@ input {
   background-color: rgb(135, 208, 104);
   border-radius: 2.66667vw;
   font-family: FZLTZHJW--GB1-0;
-  font-size: 2.4vw;
+  font-size: 10px;
   color: #ffffff;
   border: none;
   outline: none;
-  transform: scale(0.5, 0.5);
-  transform-origin: center;
-  width: 29.33333vw;
-  height: 5.33333vw;
+  width: 16.33333vw;
+  height: 3.33333vw;
   margin-top: 1.33333vw;
   /* margin-left: -13px; */
 }

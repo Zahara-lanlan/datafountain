@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="header2">
-      <span>首页</span>
-      <button @click="gotoIndex">退出</button>
+      <span @click="gotoIndex">首页</span>
+      <button @click="gotoPublish">创建比赛</button>
+      <button @click="gotoIndex">已发布比赛</button>
     </div>
     <div class="pub-content">
       <p class="pub-title">创建比赛</p>
@@ -114,16 +115,11 @@ export default {
         startDate: this.startTime,
         endDate: this.endTime,
       };
-      // this.$router.push({ path: "/setrule" });
       axios
         .post(this.util.BASE_URL + "/competition/createComp", params)
         .then((data) => {
           if (data.data.status == "1") {
             console.log("创建比赛成功");
-            // this.$router.push({
-            //   path: "/setrule",
-            //   query: { compId: data.data.compId },
-            // });
             this.$router.push({
               path: "/setevaluate",
               query: { compId: data.data.compId },
@@ -161,6 +157,9 @@ export default {
     },
     gotoIndex() {
       this.$router.push({ path: "/" });
+    },
+    gotoPublish() {
+      this.$router.push({ path: "/setting" });
     },
   },
   mounted() {
@@ -372,5 +371,10 @@ ul li {
   padding-right: 20px;
   padding-top: 4px;
   padding-bottom: 4px;
+}
+.header2 button:last-child {
+  /* margin-right: 100px; */
+  margin-right: -42px;
+  background: #00c1de;
 }
 </style>

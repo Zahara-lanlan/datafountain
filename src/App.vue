@@ -22,11 +22,10 @@ export default {
   overflow-x: hidden;
 }
 body {
-  background: #fafafa;
+  background: #fafafa !important;
   margin: 0;
   padding: 0;
   /* background: url("./assets/img/R.jpeg");
   background-size: 100% auto; */
-  
 }
 </style>
