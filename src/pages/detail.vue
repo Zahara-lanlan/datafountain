@@ -7,22 +7,22 @@
     </div>
     <div class="container">
       <div class="cmpt-container2">
-        <div class="competition-wrapper">
-          <!-- <div class="competition__avatar">
-          <img src="./../assets/img/game.jpg" />
-        </div> -->
-          <div class="competition-info">
-            <div class="competition__survey">
-              <h2 class="competition__title">
-                {{ this.name }}
-              </h2>
-              <span class="compt__cmpt-type">{{ this.compyType }}</span>
-            </div>
-            <div class="competition__sponsor inline-vcenter">
-              <p>{{ this.compBackGround }}</p>
-            </div>
+        <!-- <div class="competition-wrapper" style="diplay: flex"> -->
+        <div class="competition__avatar">
+          <img :src="this.image" />
+        </div>
+        <div class="competition-info">
+          <div class="competition__survey">
+            <h2 class="competition__title">
+              {{ this.name }}
+            </h2>
+            <span class="compt__cmpt-type">{{ this.compyType }}</span>
+          </div>
+          <div class="competition__sponsor inline-vcenter">
+            <p>{{ this.compBackGround }}</p>
           </div>
         </div>
+        <!-- </div> -->
       </div>
       <div class="sub-page">
         <div class="nav-wrapper">
@@ -246,6 +246,7 @@ export default {
       compId: this.$route.query.compId,
       name: this.$route.query.name,
       compyType: this.$route.query.compType,
+      image: decodeURIComponent(this.$route.query.img),
       compBackGround: "", //大赛背景
       compIntro: "", //赛题介绍
       compRule: "", //赛制规则
@@ -273,6 +274,7 @@ export default {
   },
   mounted() {
     console.log("初始化详情");
+    console.log("11111" + decodeURIComponent(this.$route.query.img));
     // this.util.setBodyBackGround();
     console.log(this.$route.query);
     this.getDetailInfo();
@@ -673,7 +675,7 @@ export default {
 .cmpt-container2 {
   /* margin-left: 100px; */
   width: 77.33333vw;
-  height: 100%;
+  height: 95px;
   border: 0.13333vw solid #f5f5f5;
   padding-bottom: 15px;
   background: #ffffff;
@@ -700,16 +702,19 @@ export default {
   overflow: hidden;
 }
 .competition__avatar img {
-  width: 150px;
-  height: 94px;
+  width: 100px;
+  height: 75px;
   vertical-align: middle;
   -o-object-fit: cover;
   object-fit: cover;
   border-radius: 6px;
+  margin-left: 27px;
+  margin-top: 15px;
 }
 .competition-info {
   /* margin-left: 260px; */
   padding-left: 24px;
+  padding-top: 20px;
   /* border: 1px solid red; */
   /* height: 94px; */
 }
@@ -758,7 +763,7 @@ export default {
 .competition__sponsor {
   margin-top: -3vw;
   /* display: flex; */
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 .competition__sponsor-icon {
   margin-left: -9.26667vw;
@@ -768,12 +773,12 @@ export default {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #888;
-  line-height: 20px;
-  display: inline-block;
+  line-height: 2.66667vw;
+  /* display: inline-block; */
   transform: scale(0.6, 0.6);
   transform-origin: left;
-  width: 707px;
-  margin-left: 1.83333vw;
+  /* width: 94.26667vw; */
+  margin-left: 15.6vw;
 }
 
 .sub-page {

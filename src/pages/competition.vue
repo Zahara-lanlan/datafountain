@@ -11,8 +11,10 @@
         class="compt-item"
         v-for="item of competList"
         :key="item.key"
-        @click="handelDetails(item.compId, item.name, item.compType)"
+        @click="handelDetails(item.compId, item.name, item.compType, item.img)"
       >
+        <img class="image" :src="item.img" alt="" />
+
         <div class="compt-info">
           <div class="compt__header">
             <a
@@ -95,11 +97,11 @@ export default {
       }
     },
 
-    handelDetails(compId, name, compType) {
+    handelDetails(compId, name, compType, image) {
       console.log("比赛id是", name);
       this.$router.push({
         path: "/detail",
-        query: { compId: compId, name: name, compType: compType },
+        query: { compId: compId, name: name, compType: compType, img: image },
       });
     },
     getCompetitioninfo() {
@@ -203,7 +205,7 @@ export default {
 }
 .compt-info {
   margin-top: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   margin-left: 5px;
   width: 400px;
 }
@@ -258,5 +260,12 @@ export default {
   transform-origin: left;
   /* display: inline-block; */
   margin-left: 1.53333vw;
+}
+.image {
+  width: 70px;
+  height: 50px;
+  object-fit: cover;
+  margin-top: 14px;
+  margin-left: 20px;
 }
 </style>
