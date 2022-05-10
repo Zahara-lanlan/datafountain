@@ -675,7 +675,7 @@ export default {
 .cmpt-container2 {
   /* margin-left: 100px; */
   width: 77.33333vw;
-  height: 95px;
+  height: 100px;
   border: 0.13333vw solid #f5f5f5;
   padding-bottom: 15px;
   background: #ffffff;
@@ -785,7 +785,7 @@ export default {
   background: #ffffff;
   padding: 30px;
   /* margin-top: 20px; */
-  width: 520px;
+  width: 77.33333vw;
   border: 0.13333vw solid #f5f5f5;
   height: 100%;
 }
@@ -810,6 +810,7 @@ export default {
 }
 .page-content {
   margin-left: 20px;
+  margin-top: 20px;
 }
 .page-content p,
 .table_container span,
