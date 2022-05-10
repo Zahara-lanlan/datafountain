@@ -785,7 +785,7 @@ export default {
   background: #ffffff;
   padding: 30px;
   /* margin-top: 20px; */
-  width: 77.33333vw;
+  width: 520px;
   border: 0.13333vw solid #f5f5f5;
   height: 100%;
 }
