@@ -777,7 +777,7 @@ export default {
   /* display: inline-block; */
   transform: scale(0.6, 0.6);
   transform-origin: left;
-  /* width: 94.26667vw; */
+  width: 94.26667vw;
   margin-left: 15.6vw;
 }
 
